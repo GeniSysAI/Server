@@ -14,7 +14,18 @@ GeniSys AI is an open source Artificial Intelligence Assistant Network using Com
 
 # What Will We Do?
 
-This tutorial will help you setup the server required for your GeniSys network, and also takes you through setting up iotJumpWay devices and applications. 
+This tutorial will help you setup the server required for your GeniSys network, and also takes you through setting up iotJumpWay devices and applications. In detail this guide will cover the following:
+
+- Installing Ubuntu
+- Installing & setting up NGINX
+- Installing & setting up Let's Encrypt
+- Installing & setting up PHP
+- Installing & setting up MySql
+- Installing & setting up phpMyAdmin
+- Setting up domain name and DNS configuration
+- Port forwarding traffic to your server
+- Securing server with IP tables
+- Proxying secure traffic to your private IoT devices
 
 # Contributing
 Please read **CONTRIBUTING.md** for details on our code of conduct, and the process for submitting pull requests to us.
