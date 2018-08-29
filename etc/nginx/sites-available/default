@@ -22,7 +22,7 @@ server {
 
 	root /var/www/html;
 
-	server_name network.genisys.host;
+	server_name Subdomain.Domain.TLD;
 
 	location / {
 		try_files $uri $uri.html $uri/ @extensionless-php;
@@ -45,8 +45,8 @@ server {
 
     listen [::]:443 ssl ipv6only=on; # managed by Certbot
     listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/network.genisys.host/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/network.genisys.host/privkey.pem; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/Subdomain.Domain.TLD/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/Subdomain.Domain.TLD/privkey.pem; # managed by Certbot
     include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
@@ -54,14 +54,14 @@ server {
 
 server {
 	
-    if ($host = network.genisys.host) {
+    if ($host = Subdomain.Domain.TLD) {
         return 301 https://$host$request_uri;
     } # managed by Certbot
 
 	listen 80 default_server;
 	listen [::]:80 default_server;
 
-	server_name network.genisys.host;
+	server_name Subdomain.Domain.TLD;
     return 404; # managed by Certbot
 
 }
