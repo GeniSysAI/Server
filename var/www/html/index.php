@@ -1,6 +1,17 @@
 <?php session_start();
 include dirname(__FILE__) . '/../classes/startup/init.php';
+
+$pageDetails = [
+    "PageID" => "Login",
+    "Domain" => $_GeniSys->_confs["domainString"]
+];
+
 include dirname(__FILE__) . '/../classes/users/users.php';
+
+#print_r($_SESSION);
+#session_destroy();
+$_users->checkSession();
+
 ?>
 
 <!DOCTYPE html>
@@ -24,15 +35,15 @@ include dirname(__FILE__) . '/../classes/users/users.php';
         <meta name="description" content="<?=$_GeniSys->_confs["meta_description"]; ?>">
         <meta name="author" content="Adam Milton-Barker">
 
-        <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/vendor/bootstrap/css/bootstrap.css">
-        <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/vendor/metisMenu/metisMenu.min.css">
-        <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/css/sb-admin-2.css">
-        <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/vendor/font-awesome/css/font-awesome.min.css">
-        <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/GeniSys/GeniSys.css">
+        <link type="text/css" rel="stylesheet" href="<?=$pageDetails["Domain"]; ?>/media/vendor/bootstrap/css/bootstrap.css">
+        <link type="text/css" rel="stylesheet" href="<?=$pageDetails["Domain"]; ?>/media/vendor/metisMenu/metisMenu.min.css">
+        <link type="text/css" rel="stylesheet" href="<?=$pageDetails["Domain"]; ?>/media/css/sb-admin-2.css">
+        <link type="text/css" rel="stylesheet" href="<?=$pageDetails["Domain"]; ?>/media/vendor/font-awesome/css/font-awesome.min.css">
+        <link type="text/css" rel="stylesheet" href="<?=$pageDetails["Domain"]; ?>/media/GeniSys/GeniSys.css">
     
-        <link type="image/x-icon" rel="icon" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/images/site/favicon.png" />
-        <link type="image/x-icon" rel="shortcut icon" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/images/site/favicon.png" />
-        <link type="image/x-icon" rel="apple-touch-icon" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/images/site/favicon.png" />
+        <link type="image/x-icon" rel="icon" href="<?=$pageDetails["Domain"]; ?>/media/images/site/favicon.png" />
+        <link type="image/x-icon" rel="shortcut icon" href="<?=$pageDetails["Domain"]; ?>/media/images/site/favicon.png" />
+        <link type="image/x-icon" rel="apple-touch-icon" href="<?=$pageDetails["Domain"]; ?>/media/images/site/favicon.png" />
 
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -66,7 +77,7 @@ include dirname(__FILE__) . '/../classes/users/users.php';
                                         <input id="username" type="name" class="form-control username-validate" name="username" placeholder="App Username" value="fTM2hxkEobZY" autofocus>
                                     </div>
                                     <div class="form-group">
-                                        <input id="password" type="password" class="form-control password-validate" name="password" placeholder="App Password" value="0$k2R(kjzF">
+                                        <input id="password" type="password" class="form-control password-validate" name="password" placeholder="App Password" value="0$k2R(kjzF" autocomplete="false">
                                         <input id="login" type="hidden" class="" name="login" value="1">
                                     </div>
                                     <a id="formSubmit" class="btn btn-lg btn-success btn-block">Login</a>
@@ -79,11 +90,7 @@ include dirname(__FILE__) . '/../classes/users/users.php';
             </div>
         </div>
         
-        <script type="text/javascript" src="<?=$_GeniSys->_confs["domainString"]; ?>/media/vendor/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="<?=$_GeniSys->_confs["domainString"]; ?>/media/vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="<?=$_GeniSys->_confs["domainString"]; ?>/media/vendor/metisMenu/metisMenu.min.js"></script>
-        <script type="text/javascript" src="<?=$_GeniSys->_confs["domainString"]; ?>/media/js/sb-admin-2.js"></script>
-        <script type="text/javascript" src="<?=$_GeniSys->_confs["domainString"]; ?>/media/GeniSys/validation.js"></script>
+        <?php  include dirname(__FILE__) . '/includes/scripts.php'; ?>
  
     </body>
 

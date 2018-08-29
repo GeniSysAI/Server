@@ -20,6 +20,11 @@ var validation = {
             case "":
                 $("#"+id).addClass('formError');
                 retVal=false;
+                Logging.logMessage(
+                    "Core",
+                    "Validation",
+                    "Username Empty"
+                );
                 break;
 
             default: 
@@ -29,11 +34,21 @@ var validation = {
                     case false:
                         $("#"+id).addClass('formError');
                         retVal=false;
+                        Logging.logMessage(
+                            "Core",
+                            "Validation",
+                            "Username Validation Failed ("+ $("#"+id).val() + ")"
+                        );
                         break;
         
                     default: 
                         $("#"+id).removeClass('formError');
                         retVal=true;
+                        Logging.logMessage(
+                            "Core",
+                            "Validation",
+                            "Username Validation OK ("+ $("#"+id).val() + ")"
+                        );
                         break;
                 }
                 break;
@@ -50,11 +65,21 @@ var validation = {
             case "":
                 $("#"+id).addClass('formError');
                 retVal=false;
+                Logging.logMessage(
+                    "Core",
+                    "Validation",
+                    "Password Validation Failed"
+                );
                 break;
 
             default: 
                 $("#"+id).removeClass('formError');
                 retVal=true;
+                Logging.logMessage(
+                    "Core",
+                    "Validation",
+                    "Password Validation OK"
+                );
                 break;
         }
         
@@ -62,11 +87,12 @@ var validation = {
     },
     'submitValidation' : function(id)
     {
+        console.log("HERE")
         submit=true;
         
         $('.username-validate').each(function() 
         { 
-            if(!validation.usernameValidation($(this).attr('id')))
+            if(!validation.usernameValidation(this.id))
             {
                 submit = false;
             }
@@ -74,7 +100,7 @@ var validation = {
         
         $('.password-validate').each(function() 
         { 
-            if(!validation.passwordValidation($(this).attr('id')))
+            if(!validation.passwordValidation(this.id))
             {
                 submit = false;
             }
@@ -84,22 +110,35 @@ var validation = {
         {
             $.post( 
                 window.location.href, 
-                $(this).closest("form").serialize(), 
+                $("#"+id).closest("form").serialize(), 
                 function( ajaxResponse )
                 {  
                     console.log(ajaxResponse)
                     var ajaxResponse = jQuery.parseJSON(ajaxResponse); 
+                    $("#"+id).closest("form")[0].reset();
                     switch (ajaxResponse.Response) {
-                        case 'OK': 
-                            console.log(ajaxResponse.Message);
-                            $(this).closest("form")[0].reset();
+                        case 'OK': 			
+                            setTimeout(function(){
+                                console.log(ajaxResponse.Message);
+                                VoiceSynthesis.Speak(ajaxResponse.Message)	
+                                setTimeout(function(){
+                                    location.reload("/dashboard")
+                                },1000); 
+                            },1000); 
                             break;
-                        default: 
-                            console.log(ajaxResponse.Message);
-                            $(this).closest("form")[0].reset();
+                        default: 	
+                            setTimeout(function(){		
+                                console.log(ajaxResponse.Message);
+                                VoiceSynthesis.Speak(ajaxResponse.Message)	
+                            },1000); 
                             break;
                     }
-            }); 
+                }
+            ); 
+        }
+        else
+        {
+            console.log("Submit Error")
         }
     },
     'ResetForm': function(id)
