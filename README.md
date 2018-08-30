@@ -16,16 +16,16 @@ GeniSys AI is an open source Artificial Intelligence Assistant Network using Com
 
 This tutorial will help you setup the server required for your GeniSys network, and also takes you through setting up iotJumpWay devices and applications. In detail this guide will cover the following:
 
-- Installing Ubuntu
-- Installing & setting up NGINX
-- Installing & setting up Let's Encrypt
-- Installing & setting up PHP
-- Installing & setting up MySql
-- Installing & setting up phpMyAdmin
-- Setting up domain name and DNS configuration
-- Port forwarding traffic to your server
-- Securing server with IP tables
-- Proxying secure traffic to your private IoT devices
+- Installation: Ubuntu 18.04, NGINX, Let's Encrypt, PHP, MySql, phpMyAdmin, IP tables
+- Setup: Domain name & DNS configuration, router port forwarding, IP tables security, Device Proxy
+
+# Installation & Setup
+
+The following guides will give you the basics of setting up a GeniSys Server. 
+
+## Installing Ubuntu 18.04
+
+For this project, the operating system of choice is  [Ubuntu 18.04.1 LTS (Bionic Beaver)](http://releases.ubuntu.com/18.04/ "Ubuntu 18.04.1 LTS (Bionic Beaver)"). To get your operating system installed you can follow the [Create a bootable USB stick on Ubuntu](https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-ubuntu#0 "Create a bootable USB stick on Ubuntu") tutorial.
 
 # Contributing
 Please read **CONTRIBUTING.md** for details on our code of conduct, and the process for submitting pull requests to us.
