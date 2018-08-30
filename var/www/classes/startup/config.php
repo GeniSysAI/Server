@@ -1,12 +1,12 @@
 <?php
 
     $config=[
-        "key" => '',
         "dbname" => '',
         "dbusername" => '',
         "dbpassword" => '',
-        "JumpWayAppKey" => '',
-        "JumpWayAppPass"  => '',
+        "JumpWayAppID" => 0,
+        "JumpWayAppPublic" => '',
+        "JumpWayAppSecret"  => '',
         "JumpWayMqttUser"  => '',
         "JumpWayMqttPass"  => ''
 	]; 

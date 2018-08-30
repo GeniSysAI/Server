@@ -1,12 +1,12 @@
 <?php session_start();
-include dirname(__FILE__) . '/../classes/startup/init.php';
 
 $pageDetails = [
-    "PageID" => "Login",
-    "Domain" => $_GeniSys->_confs["domainString"]
+    "PageID" => "Login"
 ];
 
-include dirname(__FILE__) . '/../classes/users/users.php';
+include dirname(__FILE__) . '/../classes/startup/init.php';
+include dirname(__FILE__) . '/../classes/users/core.php';
+include dirname(__FILE__) . '/../classes/iotJumpWay/Devices.php';
 
 #print_r($_SESSION);
 #session_destroy();
@@ -35,16 +35,16 @@ $_users->checkSession();
         <meta name="description" content="<?=$_GeniSys->_confs["meta_description"]; ?>">
         <meta name="author" content="Adam Milton-Barker">
 
-        <link type="text/css" rel="stylesheet" href="<?=$pageDetails["Domain"]; ?>/media/vendor/bootstrap/css/bootstrap.css">
-        <link type="text/css" rel="stylesheet" href="<?=$pageDetails["Domain"]; ?>/media/vendor/metisMenu/metisMenu.min.css">
-        <link type="text/css" rel="stylesheet" href="<?=$pageDetails["Domain"]; ?>/media/css/sb-admin-2.css">
-        <link type="text/css" rel="stylesheet" href="<?=$pageDetails["Domain"]; ?>/media/vendor/font-awesome/css/font-awesome.min.css">
-        <link type="text/css" rel="stylesheet" href="<?=$pageDetails["Domain"]; ?>/media/GeniSys/GeniSys.css">
+        <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/vendor/bootstrap/css/bootstrap.css">
+        <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/vendor/metisMenu/metisMenu.min.css">
+        <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/css/sb-admin-2.css">
+        <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/vendor/font-awesome/css/font-awesome.min.css">
+        <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/GeniSys/GeniSys.css">
     
-        <link type="image/x-icon" rel="icon" href="<?=$pageDetails["Domain"]; ?>/media/images/site/favicon.png" />
-        <link type="image/x-icon" rel="shortcut icon" href="<?=$pageDetails["Domain"]; ?>/media/images/site/favicon.png" />
-        <link type="image/x-icon" rel="apple-touch-icon" href="<?=$pageDetails["Domain"]; ?>/media/images/site/favicon.png" />
-
+        <link type="image/x-icon" rel="icon" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/images/site/favicon.png" />
+        <link type="image/x-icon" rel="shortcut icon" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/images/site/favicon.png" />
+        <link type="image/x-icon" rel="apple-touch-icon" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/images/site/favicon.png" />
+ 
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -64,7 +64,7 @@ $_users->checkSession();
 
                         <div class="panel-heading">
 
-                            <h3 class="panel-title">Sign In To GeniSys</h3>
+                            <h3 class="panel-title">Sign In To GeniSys</h3> <div id="clock"></div>
 
                         </div>
                         <div class="panel-body">
@@ -74,10 +74,10 @@ $_users->checkSession();
                                 <fieldset>
 
                                     <div class="form-group">
-                                        <input id="username" type="name" class="form-control username-validate" name="username" placeholder="App Username" value="fTM2hxkEobZY" autofocus>
+                                        <input id="username" type="name" class="form-control username-validate" name="username" placeholder="App Public Key" value="" autofocus>
                                     </div>
                                     <div class="form-group">
-                                        <input id="password" type="password" class="form-control password-validate" name="password" placeholder="App Password" value="0$k2R(kjzF" autocomplete="false">
+                                        <input id="password" type="password" class="form-control password-validate" name="password" placeholder="App Private Key" value="" autocomplete="false">
                                         <input id="login" type="hidden" class="" name="login" value="1">
                                     </div>
                                     <a id="formSubmit" class="btn btn-lg btn-success btn-block">Login</a>
@@ -89,7 +89,7 @@ $_users->checkSession();
                 </div>
             </div>
         </div>
-        
+
         <?php  include dirname(__FILE__) . '/includes/scripts.php'; ?>
  
     </body>

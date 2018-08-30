@@ -20,10 +20,18 @@ var VoiceSynthesis = {
 	},
 	'Speak' : function (text)
 	{
-		VoiceSynthesis.synth.speak(new SpeechSynthesisUtterance(text));
+		var voices = window.speechSynthesis.getVoices();
+		var msg = new SpeechSynthesisUtterance();
+		msg.voice = voices[10];
+		msg.voiceURI = 'system';
+		msg.volume = 1; 
+		msg.rate = 1; 
+		msg.pitch = 1;
+		msg.lang = 'en-US';
+		this.synth.speak(msg);
 	}, 
 	'StopSpeaking' :  function()
 	{
-        VoiceSynthesis.synth.cancel();
+        this.synth.cancel();
     } 
 }
