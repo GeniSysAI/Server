@@ -37,7 +37,7 @@ Once you have done this your domain name or subdomain will be pointing towards y
 
 ## Install Nginx
 
-Now it is time to install Nginx, follow the guide below to install the required software.
+Now it is time to install Nginx, follow the commands below to install the required software.
 
 ```
  $ sudo apt-get install nginx
@@ -57,7 +57,21 @@ What the above commands do is:
 - Checks if the configuration is OK
 - Reloads the Nginx service
 
-If you visit your site you should now see the default Nginx page.
+## Setup Port Forwarding
+
+Now we have your domain pointing to your public IP, it is time to add a port forward, traffic to your network will be coming from port 80 (insecure) and secure. Although Nginx will bounce the insecure traffic to port 443, we still need to add a port forward for port 80 as well as 443. How you will do this will vary, but you need to find the area of your router that allows you to add port forwards, and then add one port forward for incoming insecure traffic to port 80 of the server, and one for port 443. This will open the HTTP ports on your router and forward the traffic to the same ports on your server. In the case someone tries to access using insecure protocol (http - port 80) they will be automatically be sent to the secure port of the server (https - 443)
+
+## Install Let's Encrypt
+
+Security is everything, and it is even better when security is free ;) To encrypt our network we are going to use SSL provided by [Let’s Encrypt](https://letsencrypt.org/ "Let’s Encrypt"). Follow the commands below to set up Let’s Encrypt.
+
+```
+ $ sudo add-apt-repository ppa:certbot/certbot
+ $ sudo apt-get update
+ $ sudo apt-get install python-certbot-nginx
+```
+
+If you have followed above correctly you should now be able to access your website, but only using the secure protocol, 443, ie: https. If you visit your site you should now see the default Nginx page.
 
 # Contributing
 Please read **CONTRIBUTING.md** for details on our code of conduct, and the process for submitting pull requests to us.
