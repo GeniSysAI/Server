@@ -131,7 +131,7 @@ Then you need to add the following code:
 
 If you now visit the info page your website ie: https://www.YourDomain.com/info you should see the PHP configuration of your server.
 
-[GeniSys AI Server PHP config](images/PHP.jpg)
+![GeniSys AI Server PHP config](images/PHP.jpg)
 
 # Contributing
 Please read **CONTRIBUTING.md** for details on our code of conduct, and the process for submitting pull requests to us.
