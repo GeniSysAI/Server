@@ -82,6 +82,18 @@ Now it is time to install MySql on your server. Follow the commands below and co
  $ sudo mysql_secure_installation
 ```
 
+Now create a user and password that we will use for phpMyAdmin, first login in with the root MySql username you created earlier and then enter the password when prompted, this will log you into MySql as that user.
+
+```
+ $ smysql -u YourMySqlRootUser -p
+```
+
+Now we can create a user with the required permissions to manage phpMyAdmin, make sure you remember the credentials you create with the below command.
+
+```
+ $ GRANT SELECT, INSERT, DELETE, CREATE  ON *.* TO 'YourNewUsername'@'localhost' IDENTIFIED BY 'YourNewPassword';
+```
+
 ## Install PHP
 
 Now you will install PHP on your server. Follow the commands below and complete any required steps for the installation to accomplish this. You may need to swap 7.2 in the second command depending on what version of php-fpm is installed.
