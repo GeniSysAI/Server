@@ -109,7 +109,12 @@ Finally you need to open the default configuration:
  $ sudo nano /etc/nginx/sites-available/default
 ```
 
-and match the [example default configuration](https://github.com/GeniSysAI/Server/blob/0.0.1/etc/nginx/sites-available/default "example default configuration"), replacing the domain name where relevant.
+and match the [example default configuration](https://github.com/GeniSysAI/Server/blob/0.0.1/etc/nginx/sites-available/default "example default configuration"), replacing the domain name where relevant. Once you have completed those steps, issue the following commands which will tell you if the configuration is ok and if so you can reload Nginx. 
+
+```
+sudo nginx -t
+sudo systemctl reload nginx
+```
 
 # Contributing
 Please read **CONTRIBUTING.md** for details on our code of conduct, and the process for submitting pull requests to us.
