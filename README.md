@@ -145,6 +145,21 @@ If you now visit the info page your website ie: https://www.YourDomain.com/info 
 
 ![GeniSys AI Server PHP config](images/PHP.jpg)
 
+## Install phpMyAdmin
+
+Now you should install phpMyAdmin and upload the default MySql table configuration.
+ 
+```
+ $ sudo apt-get install phpmyadmin
+```
+Press tab -> enter -> yes -> password, then create a link to phpMyAdmin, if you want to home this in a place other than phpmyadmin you can simply rename phpmyadmin in the command below.
+
+```
+ $ sudo ln -s /usr/share/phpmyadmin /var/www/html
+```
+
+Now you should be able to visit phpMyAdmin by accessing the relevant directory on your website.
+
 # Contributing
 Please read **CONTRIBUTING.md** for details on our code of conduct, and the process for submitting pull requests to us.
 
