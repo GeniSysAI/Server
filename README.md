@@ -103,7 +103,7 @@ Then restart PHP:
  $ sudo systemctl restart php7.2-fpm
 ```
 
-Finally you need to open the default configuration:
+Now you need to open the default configuration:
 
 ```
  $ sudo nano /etc/nginx/sites-available/default
@@ -112,9 +112,26 @@ Finally you need to open the default configuration:
 and match the [example default configuration](https://github.com/GeniSysAI/Server/blob/0.0.1/etc/nginx/sites-available/default "example default configuration"), replacing the domain name where relevant. Once you have completed those steps, issue the following commands which will tell you if the configuration is ok and if so you can reload Nginx. 
 
 ```
-sudo nginx -t
-sudo systemctl reload nginx
+ $ sudo nginx -t
+ $ sudo systemctl reload nginx
 ```
+
+Now create a file in the public html directory called info.php. The following command will open the new file for editing:
+
+```
+ $ sudo nano /var/www/html/info.php
+```
+
+Then you need to add the following code:
+
+```
+<?php
+    phpinfo();
+```
+
+If you now visit the info page your website ie: https://www.YourDomain.com/info you should see the PHP configuration of your server.
+
+[GeniSys AI Server PHP config](images/PHP.jpg)
 
 # Contributing
 Please read **CONTRIBUTING.md** for details on our code of conduct, and the process for submitting pull requests to us.
