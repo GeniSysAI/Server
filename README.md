@@ -238,6 +238,12 @@ First of all you should [register your free iotJumpWay account](https://www.iotj
 - Create your iotJumpWay zones [(Documentation)](https://www.iotjumpway.tech/developers/getting-started-zones "(Documentation)")  
 - Create your iotJumpWay application [(Documentation)](https://www.iotjumpway.tech/developers/getting-started-applications "(Documentation)") 
 
+To install the iotJumpWay MQTT software issue the following command on your server:
+
+```
+ $ sudo pip install JumpWayMQTT
+```
+
 # Install Repository Code
 
 Now you can add the repository code to your server, to do this follow the guide:
