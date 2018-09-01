@@ -4,9 +4,10 @@
 [![UPCOMING RELEASE](https://img.shields.io/badge/UPCOMING%20RELEASE-0.0.1-blue.svg)](https://github.com/GeniSysAI/Server/tree/0.0.1)
 
 ## About GeniSys AI
-[![GeniSys AI Structure](images/GeniSys-Structure.png)](https://github.com/GeniSysAI)
 
 GeniSys AI is an open source Artificial Intelligence Assistant Network using Computer Vision, Natural Linguistics and the Internet of Things. GeniSys uses a system based on [TASS A.I](https://github.com/TASS-AI/TASS-Facenet "TASS A.I") for [vision](https://github.com/GeniSysAI/Vision "vision"), an [NLU engine](https://github.com/GeniSysAI/NLU "NLU engine") for natural language understanding, in browser speech synthesis and speech recognition for speech and hearing, all homed on a dedicated Linux server in your home and managed via an online operating system.
+
+[![GeniSys AI Structure](images/GeniSys-Structure.png)](https://github.com/GeniSysAI)
 
 ## About GeniSys AI Server
 [![GeniSys AI Server](images/GeniSysHome.jpg)](https://github.com/GeniSysAI/Server)
