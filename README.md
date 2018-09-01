@@ -60,6 +60,12 @@ What the above commands do is:
 - Checks if the configuration is OK
 - Reloads the Nginx service
 
+You can check the Nginx logs by using the following command:
+
+```
+cat /var/log/nginx/error.log
+```
+
 ## Setup Port Forwarding
 
 Now you have your domain pointing to your public IP, it is time to add a port forward, traffic to your network will be coming from port 80 (insecure) and secure. Although Nginx will bounce the insecure traffic to port 443, we still need to add a port forward for port 80 as well as 443. How you will do this will vary, but you need to find the area of your router that allows you to add port forwards, and then add one port forward for incoming insecure traffic to port 80 of the server, and one for port 443. This will open the HTTP ports on your router and forward the traffic to the same ports on your server. In the case someone tries to access using insecure protocol (http - port 80) they will be automatically be sent to the secure port of the server (https - 443)
@@ -75,6 +81,43 @@ Security is everything, and it is even better when security is free ;) To encryp
 ```
 
 If you have followed above correctly you should now be able to access your website, but only using the secure protocol, 443, ie: https. If you visit your site you should now see the default Nginx page.
+
+## Install IPTables
+
+Now you should install IPTables, to do this execute the following code:
+
+```
+ $ sudo apt-get install iptables-persistent
+ $ sudo apt-get install netfilter-persistent
+```
+
+Once installed,  you can check the current configuration with the following command:
+
+```
+ $ sudo iptables -L
+```
+
+Open the configuration file, use the **/etc/iptables/rules.v4** example in the project repo to replace the configuration after copying the default config.
+
+```
+ $ sudo cp /etc/iptables/rules.v4 sudo cp /etc/iptables/rules.v4.copy
+ $ sudo nano /etc/iptables/rules.v4
+```
+
+You should notice the rules that allow traffic to the server, the ports that are accepted can be found in the **Acceptable TCP traffic** block:
+
+```
+-A TCP -p tcp --dport 22  -j ACCEPT
+-A TCP -p tcp --dport 80  -j ACCEPT
+-A TCP -p tcp --dport 443 -j ACCEPT
+```
+
+Then save and reload:
+
+```
+ $ sudo service netfilter-persistent save
+ $ sudo service netfilter-persistent reload
+```
 
 ## Install MySql
 
