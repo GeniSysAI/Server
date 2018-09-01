@@ -6,6 +6,7 @@ $pageDetails = [
 
 include dirname(__FILE__) . '/../classes/startup/init.php';
 include dirname(__FILE__) . '/../classes/users/core.php';
+include dirname(__FILE__) . '/../classes/Server/core.php';
 
 #print_r($_SESSION);
 #session_destroy();
