@@ -1,4 +1,4 @@
-
+ 
     
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 
@@ -36,10 +36,16 @@
                                 <a href="<?=$_GeniSys->_confs["domainString"]; ?>/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
                             <li>
+                                <a href="<?=$_GeniSys->_confs["domainString"]; ?>/Server/"><i class="fa fa-cloud fa-fw"></i> Server</a>
+                            </li>
+                            <li>
                                 <a href="<?=$_GeniSys->_confs["domainString"]; ?>/NLU/"><i class="fa fa-commenting-o fa-fw"></i> NLU</a>
                             </li>
                             <li>
-                                <a href="<?=$_GeniSys->_confs["domainString"]; ?>/TASS"><i class="fa fa-eye fa-fw"></i> TASS</a>
+                                <a href="<?=$_GeniSys->_confs["domainString"]; ?>/TASS/"><i class="fa fa-eye fa-fw"></i> TASS</a>
+                            </li>
+                            <li>
+                                <a href="<?=$_GeniSys->_confs["domainString"]; ?>/Users/"><i class="fa fa-users fa-fw"></i> Users</a>
                             </li>
                             <li>
                                 <a href="<?=$_GeniSys->_confs["domainString"]; ?>/<?=$_GeniSys->_confs["phpmyadmin"]; ?>" target="_BLANK"><i class="fa fa-database fa-fw"></i> phpMyAdmin</a>
@@ -51,7 +57,7 @@
                                 <a href="<?=$_GeniSys->_confs["domainString"]; ?>/logout"><i class="fa fa-power-off fa-fw"></i> Log out</a>
                             </li>
                         </ul> 
-                    </div>
+                    </div> 
                     
                 </div>
                 

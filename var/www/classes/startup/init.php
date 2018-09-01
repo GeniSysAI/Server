@@ -10,12 +10,15 @@ error_reporting(E_ALL);
 
         public function __construct()
         {
-            include dirname(__FILE__) . '/../../classes/startup/config.php'; 
-
+            $config = json_decode(
+                file_get_contents(
+                    "/var/www/classes/startup/confs.json", 
+                    true));
+                    
             $this->config     = $config; 
-            $this->dbname     = $config['dbname']; 
-            $this->dbusername = $config['dbusername']; 
-            $this->dbpassword = $config['dbpassword'];
+            $this->dbname     = $config->dbname; 
+            $this->dbusername = $config->dbusername; 
+            $this->dbpassword = $config->dbpassword;
             $this->connect();
         }
 
@@ -24,10 +27,10 @@ error_reporting(E_ALL);
             try
             {
                 $this->dbcon = new PDO(
-                    'mysql:host=localhost'.';dbname='.$this->dbname,$this->dbusername,$this->dbpassword, 
-                    array(
-                        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"
-                    )
+                    'mysql:host=localhost'.';dbname='.$this->dbname,
+                    $this->dbusername,
+                    $this->dbpassword, 
+                    [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"]
                 );
                 $this->dbcon->setAttribute(
                     PDO::ATTR_ERRMODE,
@@ -54,14 +57,15 @@ error_reporting(E_ALL);
             $this->setCookie();
 
             $this->_secCon      = $_secCon->dbcon;
-            $this->_app         = $_secCon->config['JumpWayAppID'];
-            $this->_user        = $_secCon->config['JumpWayAppPublic'];
-            $this->_auth        = $_secCon->config['JumpWayAppSecret'];
-            $this->_mqttUser    = $_secCon->config['JumpWayMqttUser'];
-            $this->_mqttPass    = $_secCon->config['JumpWayMqttPass'];
+            $this->_app         = $_secCon->config->JumpWayAppID;
+            $this->_user        = $_secCon->config->JumpWayAppPublic;
+            $this->_auth        = $_secCon->config->JumpWayAppSecret;
+            $this->_mqttUser    = $_secCon->config->JumpWayMqttUser;
+            $this->_mqttPass    = $_secCon->config->JumpWayMqttPass;
             $this->_pageDetails = $_pageDetails;
 
             include dirname(__FILE__) . '/../../classes/helpers.php'; 
+            
             $this->_helpers     = new Helpers($this);
             $this->_confs       = $this->getConfigs();
 
@@ -93,11 +97,13 @@ error_reporting(E_ALL);
                     jumpWayAPI,
                     nluID,
                     nluAddress,
+                    tassID,
                     tassDevices,
                     phpmyadmin,
                     meta_title,
                     meta_description,
-                    domainString 
+                    domainString,
+                    jumpwayAPI 
                 FROM a7fh46_settings    
             ");
             $pdoQuery->execute();

@@ -200,13 +200,14 @@ var validation = {
                 $("#"+id).closest("form").serialize(), 
                 function( ajaxResponse )
                 {  
-                    var ajaxResponse = jQuery.parseJSON(ajaxResponse); 
-                    $("#"+id).closest("form")[0].reset();
+                    var ajaxResponse = jQuery.parseJSON(ajaxResponse);  
                     switch (ajaxResponse.Response) 
                     {
-                        case 'OK': 			
+                        case 'OK':
+
                             setTimeout(function()
                             {
+
                                 VoiceSynthesis.Speak(ajaxResponse.ResponseMessage)	
                                 setTimeout(function()
                                 {
@@ -302,3 +303,8 @@ $('.container').on(
         e.preventDefault();
         validation.submitValidation($(this).attr('id'));
 });
+
+$(function(){
+    $(".btn").on("click",function(){
+    });
+  });

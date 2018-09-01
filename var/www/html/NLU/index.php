@@ -12,7 +12,6 @@ include dirname(__FILE__) . '/../../classes/NLU/core.php';
 $device  = $_GeniSys->_confs['nluID'] ? $_iotJumpWayDevices->getDevice($_GeniSys->_confs['nluID']) : null;
 $devices = $_iotJumpWayDevices->getDeviceList();
 
-print_r($device);
 #print_r($_SESSION);
 #session_destroy();
 $_users->checkSession();
