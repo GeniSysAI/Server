@@ -1,0 +1,13 @@
+{
+    "dbname" : "",
+    "dbusername" : "",
+    "dbpassword" : "",
+    "JumpWayAppID" : 0,
+    "JumpWayAppPublic" : "",
+    "JumpWayAppSecret"  : "",
+    "JumpWayLocation" : 0,
+    "JumpWayZone" : 0,
+    "JumpWayDevice" : 0,
+    "JumpWayMqttUser"  : "",
+    "JumpWayMqttPass"  : ""
+}

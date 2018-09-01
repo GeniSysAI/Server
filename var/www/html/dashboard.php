@@ -1,12 +1,12 @@
 <?php session_start();
 
 $pageDetails = [
-    "PageID" => "Login"
+    "PageID" => "Dashboard"
 ];
 
 include dirname(__FILE__) . '/../classes/startup/init.php';
 include dirname(__FILE__) . '/../classes/users/core.php';
-include dirname(__FILE__) . '/../classes/iotJumpWay/Devices.php';
+include dirname(__FILE__) . '/../classes/Server/core.php';
 
 #print_r($_SESSION);
 #session_destroy();
@@ -37,14 +37,14 @@ $_users->checkSession();
 
         <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/vendor/bootstrap/css/bootstrap.css">
         <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/vendor/metisMenu/metisMenu.min.css">
-        <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/css/sb-admin-2.css">
+        <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/css/sb-admin-2.css"> 
         <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/vendor/font-awesome/css/font-awesome.min.css">
         <link type="text/css" rel="stylesheet" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/GeniSys/GeniSys.css">
     
         <link type="image/x-icon" rel="icon" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/images/site/favicon.png" />
         <link type="image/x-icon" rel="shortcut icon" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/images/site/favicon.png" />
         <link type="image/x-icon" rel="apple-touch-icon" href="<?=$_GeniSys->_confs["domainString"]; ?>/media/images/site/favicon.png" />
- 
+
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -53,43 +53,63 @@ $_users->checkSession();
     </head>
 
     <body>
+    
+        <div id="wrapper">
 
-        <div class="container">
-
-            <div class="row">
-
-                <div class="col-md-4 col-md-offset-4">
-
-                    <div class="login-panel panel panel-default">
-
-                        <div class="panel-heading">
-
-                            <h3 class="panel-title">Sign In To GeniSys</h3> <div id="clock"></div>
-
-                        </div>
-                        <div class="panel-body">
-
-                            <form role="form">
-
-                                <fieldset>
-
-                                    <div class="form-group">
-                                        <input id="username" type="name" class="form-control username-validate" name="username" placeholder="App Public Key" value="" autofocus>
-                                    </div>
-                                    <div class="form-group">
-                                        <input id="password" type="password" class="form-control password-validate" name="password" placeholder="App Private Key" value="" autocomplete="false">
-                                        <input id="login" type="hidden" class="" name="login" value="1">
-                                    </div>
-                                    <a id="formSubmit" class="btn btn-lg btn-success btn-block">Login</a>
-
-                                </fieldset>
-                            </form>
-                        </div>
+            <?php include dirname(__FILE__) . '/includes/nav.php'; ?>
+    
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Dashboard</h1>
                     </div>
+                    
                 </div>
-            </div>
-        </div>
 
+                <?php include dirname(__FILE__) . '/includes/homeTop.php'; ?>
+                <div class="clear"></div>
+                
+                <div class="row"> 
+
+                    <div class="col-lg-8">
+
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading">
+
+                                <i class="fa fa-cogs fa-fw"></i> 
+
+                                <div class="pull-right">
+
+                                    <div class="btn-group">
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            
+                            <div class="panel-body">
+
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="col-lg-4">
+        
+                        <?php  include dirname(__FILE__) . '/includes/GeniSys.php'; ?>
+
+                        <?php  include dirname(__FILE__) . '/Server/includes/serverInfo.php'; ?>
+
+                    </div>
+                        
+                </div>
+
+            </div>
+        
+        </div>
+        
         <?php  include dirname(__FILE__) . '/includes/scripts.php'; ?>
  
     </body>

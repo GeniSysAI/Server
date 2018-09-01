@@ -3,29 +3,34 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
 header("strict-transport-security: max-age=15768000");ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-    class Connection
+    class Core
     {
         private $dbname, $dbusername, $dbpassword;
-        public $dbcon = null;
+        public  $dbcon, $config = null;
 
         public function __construct()
         {
-            include dirname(__FILE__) . '/../../classes/startup/config.php';
-            $_SESSION['confs'] = $config; 
-            $this->dbname      = $config['dbname']; 
-            $this->dbusername  = $config['dbusername']; 
-            $this->dbpassword  = $config['dbpassword'];
+            $config = json_decode(
+                file_get_contents(
+                    "/var/www/classes/startup/confs.json", 
+                    true));
+                    
+            $this->config     = $config; 
+            $this->dbname     = $config->dbname; 
+            $this->dbusername = $config->dbusername; 
+            $this->dbpassword = $config->dbpassword;
             $this->connect();
         }
 
         function connect()
         {
-            try{
+            try
+            {
                 $this->dbcon = new PDO(
-                    'mysql:host=localhost'.';dbname='.$this->dbname,$this->dbusername,$this->dbpassword, 
-                    array(
-                        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"
-                    )
+                    'mysql:host=localhost'.';dbname='.$this->dbname,
+                    $this->dbusername,
+                    $this->dbpassword, 
+                    [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"]
                 );
                 $this->dbcon->setAttribute(
                     PDO::ATTR_ERRMODE,
@@ -36,7 +41,8 @@ error_reporting(E_ALL);
                     false
                 );
             }
-            catch(PDOException $e){
+            catch(PDOException $e)
+            {
                 die($e);
             }
         }   
@@ -44,11 +50,30 @@ error_reporting(E_ALL);
 
     class aiInit
     {
-        protected $_secCon;
-        public    $_confs;
+        public $_secCon, $_confs, $_user, $_auth, $_mqttUser, $_mqttPass, $_helpers, $_pageDetails = null;
 
-        function __construct(Connection $dbcon)
+        function __construct(Core $_secCon, $_pageDetails)
         {
+            $this->setCookie();
+
+            $this->_secCon      = $_secCon->dbcon;
+            $this->_app         = $_secCon->config->JumpWayAppID;
+            $this->_user        = $_secCon->config->JumpWayAppPublic;
+            $this->_auth        = $_secCon->config->JumpWayAppSecret;
+            $this->_mqttUser    = $_secCon->config->JumpWayMqttUser;
+            $this->_mqttPass    = $_secCon->config->JumpWayMqttPass;
+            $this->_pageDetails = $_pageDetails;
+
+            include dirname(__FILE__) . '/../../classes/helpers.php'; 
+            
+            $this->_helpers     = new Helpers($this);
+            $this->_confs       = $this->getConfigs();
+
+        }
+
+        private function setCookie()
+        {
+
             if(!isSet($_COOKIE['GeniSysAI'])):
                 $rander=rand();
                 setcookie(
@@ -63,55 +88,33 @@ error_reporting(E_ALL);
                 $_COOKIE['GeniSysAI'] = $rander;
             endif; 
 
-            $this->_secCon = $dbcon->dbcon;
-            $this->getConfigs();
-        } 	
-        
-        public function decrypt($value, $code)
-        {
-            list($iv, $data) = explode(
-                '@@', 
-                base64_decode($value));
-            return mcrypt_decrypt(
-                MCRYPT_RIJNDAEL_256, 
-                $code, 
-                $data, 
-                MCRYPT_MODE_CFB, 
-                $iv);
-        }
-        
-        public function encrypt($value, $code)
-        {
-            $iv = mcrypt_create_iv(
-                mcrypt_get_iv_size(
-                    MCRYPT_RIJNDAEL_256, 
-                    MCRYPT_MODE_CFB), 
-                    MCRYPT_RAND);
-                    
-            return base64_encode(
-                $iv . '@@' .  mcrypt_encrypt(MCRYPT_RIJNDAEL_256,
-                $code, 
-                $value, 
-                MCRYPT_MODE_CFB, 
-                $iv)); 
         }
         
         protected function getConfigs()
         {
             $pdoQuery = $this->_secCon->prepare("
-                SELECT  meta_title,
+                SELECT version,
+                    jumpWayAPI,
+                    nluID,
+                    nluAddress,
+                    tassID,
+                    tassDevices,
+                    phpmyadmin,
+                    meta_title,
                     meta_description,
-                    domainString 
+                    domainString,
+                    jumpwayAPI 
                 FROM a7fh46_settings    
             ");
             $pdoQuery->execute();
-            $this->_confs=$pdoQuery->fetch(PDO::FETCH_ASSOC);
+            $response=$pdoQuery->fetch(PDO::FETCH_ASSOC);
             $pdoQuery->closeCursor();
             $pdoQuery = null; 
+            return $response;
         }
-    }
+    } 
 
-    $_secCon  = new Connection();
-    $_GeniSys = new aiInit($_secCon);
-
-?>
+    $_secCon  = new Core();
+    $_GeniSys = new aiInit(
+        $_secCon,
+        $pageDetails);
