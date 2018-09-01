@@ -10,9 +10,10 @@ GeniSys AI is an open source Artificial Intelligence Assistant Network using Com
 [![GeniSys AI Structure](images/GeniSys-Structure.png)](https://github.com/GeniSysAI)
 
 ## About GeniSys AI Server
-[![GeniSys AI Server](images/GeniSysHome.jpg)](https://github.com/GeniSysAI/Server)
 
 [GeniSys AI Server](https://github.com/GeniSysAI/Server "GeniSys AI Server") is a customisable management system for [GeniSys AI](https://github.com/GeniSysAI/Server "GeniSys AI") networks. The GeniSys management system is built on top of [Ubuntu 18.04.1 LTS (Bionic Beaver)](http://releases.ubuntu.com/18.04/ "Ubuntu 18.04.1 LTS (Bionic Beaver)"), but there should be no issues using other Linux operating systems. The server uses a secure PHP/MySql Nginx server, [Let’s Encrypt](https://letsencrypt.org/ "Let’s Encrypt") for free SSL encryption, and free IoT connectivity via the [iotJumpWay](https://www.iotJumpWay.tech "iotJumpWay").
+
+[![GeniSys AI Server](images/GeniSysHome.jpg)](https://github.com/GeniSysAI/Server)
 
 Although the completed GeniSys Server will be accessible via the outside world, this is only to help ensure encrypted traffic over your local network. It is suggested that the UI is only accessed on the local IP, the Nginx server will proxy traffic to your internal IPs for features such as the NLU and the internal TASS camera will access the local camera of the device the program is running on.
 
