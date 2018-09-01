@@ -39,6 +39,9 @@
                                 <a href="<?=$_GeniSys->_confs["domainString"]; ?>/Server/"><i class="fa fa-cloud fa-fw"></i> Server</a>
                             </li>
                             <li>
+                                <a href="<?=$_GeniSys->_confs["domainString"]; ?>/iotJumpWay/"><i class="fa fa-th fa-fw"></i> iotJumpWay</a>
+                            </li>
+                            <li>
                                 <a href="<?=$_GeniSys->_confs["domainString"]; ?>/NLU/"><i class="fa fa-commenting-o fa-fw"></i> NLU</a>
                             </li>
                             <li>

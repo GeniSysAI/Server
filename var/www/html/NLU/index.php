@@ -70,7 +70,7 @@ $_users->checkSession();
                     </div>
                 </div>
 
-                <?php include dirname(__FILE__) . '/../includes/nluTop.php'; ?>
+                <?php include dirname(__FILE__) . '/../NLU/includes/top.php'; ?>
                 <div class="clear"></div>
                 
                 <div class="row">
@@ -198,32 +198,8 @@ $_users->checkSession();
                         
                     </div>
                     <div class="col-lg-4">
-                        
-                        <div class="panel panel-default">
-                
-                            <div class="panel-heading">
-                
-                                <i class="fa fa-exclamation fa-fw"></i> Device Info
-                
-                            </div>
-                            
-                            <div class="panel-body">
-                                <div class="list-group">
-                                    <a class="list-group-item">
-                                        ID <span class="pull-right text-muted small"><em><?=$device->ResponseData->id; ?></em></span>
-                                    </a>
-                                </div>
-                                <div class="list-group">
-                                    <a class="list-group-item">
-                                        NAME <span class="pull-right text-muted small"><em><?=$device->ResponseData->device; ?></em></span>
-                                    </a>
-                                </div>
-                
-                            </div>
-                            
-                        </div> 
         
-                        <?php  #include dirname(__FILE__) . '/../NLU/includes/trainLogs.php'; ?>
+                        <?php  include dirname(__FILE__) . '/../NLU/includes/deviceInfo.php'; ?>
 
                     </div>
                         
