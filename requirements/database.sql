@@ -3,18 +3,12 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 31, 2018 at 03:24 AM
+-- Generation Time: Sep 01, 2018 at 02:46 PM
 -- Server version: 5.7.23-0ubuntu0.18.04.1
 -- PHP Version: 7.2.7-0ubuntu0.18.04.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
---
--- Database: `a7fh45_a7fh45`
---
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `a7fh46_logins`
@@ -55,6 +49,7 @@ CREATE TABLE `a7fh46_settings` (
   `version` varchar(50) NOT NULL,
   `nluID` int(11) NOT NULL,
   `nluAddress` varchar(255) NOT NULL,
+  `tassID` int(11) NOT NULL,
   `tassDevices` int(11) NOT NULL,
   `jumpwayAPI` varchar(255) NOT NULL,
   `phpmyadmin` varchar(255) NOT NULL,
@@ -68,8 +63,8 @@ CREATE TABLE `a7fh46_settings` (
 -- Dumping data for table `a7fh46_settings`
 --
 
-INSERT INTO `a7fh46_settings` (`id`, `version`, `nluID`, `nluAddress`, `tassDevices`, `jumpwayAPI`, `phpmyadmin`, `meta_title`, `meta_description`, `meta_keywords`, `domainString`) VALUES
-(1, '0.0.1', 0, '', 1, '', '', '', '', '', '');
+INSERT INTO `a7fh46_settings` (`id`, `version`, `nluID`, `nluAddress`, `tassID`, `tassDevices`, `jumpwayAPI`, `phpmyadmin`, `meta_title`, `meta_description`, `meta_keywords`, `domainString`) VALUES
+(1, '0.0.1', 0, '', 0, 0, 'http://www.iotJumpWay.tech', '', 'GeniSys AI', 'GeniSys AI', 'GeniSys AI', '');
 
 --
 -- Indexes for dumped tables
@@ -98,7 +93,8 @@ ALTER TABLE `a7fh46_loginsF`
 --
 ALTER TABLE `a7fh46_settings`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `tassDevices` (`tassDevices`);
+  ADD KEY `tassDevices` (`tassDevices`),
+  ADD KEY `tassID` (`tassID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -108,7 +104,7 @@ ALTER TABLE `a7fh46_settings`
 -- AUTO_INCREMENT for table `a7fh46_logins`
 --
 ALTER TABLE `a7fh46_logins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `a7fh46_loginsF`
 --

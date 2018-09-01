@@ -67,7 +67,7 @@ $_users->checkSession();
                     </div>
                 </div>
 
-                <?php include dirname(__FILE__) . '/../includes/serverTop.php'; ?>
+                <?php include dirname(__FILE__) . '/../Server/includes/top.php'; ?>
                 <div class="clear"></div>
                 
                 <div class="row"> 
@@ -112,9 +112,9 @@ $_users->checkSession();
 
                                     <div class="form-group">
 
-                                        <label>iotJumpWay API URL</label>
-                                        <input type="text" id="jumpwayAPI" name="jumpwayAPI" class="form-control text-validate" value="<?=$_GeniSys->_confs['jumpwayAPI']; ?>">
-                                        <p class="help-block">URL of iotJumpWay API.</p>
+                                        <label>phpMyAdmin Endpoint</label>
+                                        <input type="text" id="phpmyadmin" name="phpmyadmin" class="form-control text-validate" value="<?=$_GeniSys->_confs['phpmyadmin']; ?>">
+                                        <p class="help-block">Endpoint of phpMyAdmin.</p>
 
                                     </div>
 

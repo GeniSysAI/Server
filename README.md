@@ -3,11 +3,11 @@
 
 [![UPCOMING RELEASE](https://img.shields.io/badge/UPCOMING%20RELEASE-0.0.1-blue.svg)](https://github.com/GeniSysAI/Server/tree/0.0.1)
 
-## About GeniSys AI
+# About GeniSys AI
 
 GeniSys AI is an open source Artificial Intelligence Assistant Network using Computer Vision, Natural Linguistics and the Internet of Things. GeniSys uses a system based on [TASS A.I](https://github.com/TASS-AI/TASS-Facenet "TASS A.I") for [vision](https://github.com/GeniSysAI/Vision "vision"), an [NLU engine](https://github.com/GeniSysAI/NLU "NLU engine") for natural language understanding, in browser speech synthesis and speech recognition for speech and hearing, all homed on a dedicated Linux server in your home and managed via a secure UI.
 
-## About GeniSys AI Server
+# About GeniSys AI Server
 
 [GeniSys AI Server](https://github.com/GeniSysAI/Server "GeniSys AI Server") is a customisable management system for [GeniSys AI](https://github.com/GeniSysAI/Server "GeniSys AI") networks. The GeniSys management system is built on top of [Ubuntu 18.04.1 LTS (Bionic Beaver)](http://releases.ubuntu.com/18.04/ "Ubuntu 18.04.1 LTS (Bionic Beaver)"), but there should be no issues using other Linux operating systems. The server uses a secure PHP/MySql Nginx server, [Let’s Encrypt](https://letsencrypt.org/ "Let’s Encrypt") for free SSL encryption, and free IoT connectivity via the [iotJumpWay](https://www.iotJumpWay.tech "iotJumpWay").
 
@@ -19,24 +19,24 @@ Although the completed GeniSys Server will be accessible via the outside world, 
 
 This tutorial will help you setup the server required for your GeniSys network, and also takes you through setting up iotJumpWay devices and applications. In detail this guide will cover the following:
 
-- Installation: Ubuntu 18.04, Nginx, Let's Encrypt, PHP, MySql, phpMyAdmin, IP tables
-- Setup: Domain name & DNS configuration, router port forwarding, IP tables security, Device Proxy
+- Installation: Ubuntu 18.04, Nginx, Let's Encrypt, PHP, MySql, phpMyAdmin, IPTables, iotJumpWay
+- Setup: Nginx, PHP, MySql, phpMyAdmin, IPTables, iotJumpWay, Domain name & DNS configuration, router port forwarding, IPTables security, Device Proxies
 
 # Installation & Setup
 
 The following guides will give you the basics of setting up a GeniSys Server. 
 
-## Install Ubuntu 18.04
+# Install Ubuntu 18.04
 
 For this project, the operating system of choice is  [Ubuntu 18.04.1 LTS (Bionic Beaver)](http://releases.ubuntu.com/18.04/ "Ubuntu 18.04.1 LTS (Bionic Beaver)"). To get your operating system installed you can follow the [Create a bootable USB stick on Ubuntu](https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-ubuntu#0 "Create a bootable USB stick on Ubuntu") tutorial.
 
-## Setup Domain Name
+# Setup Domain Name
 
 Now is as good a time as any to sort out and configure a domain name. You need to have your domain already hosted on a hosting account, from there edit the DNS zone by adding an A record to your public IP, for this you need a static IP or IP software that will update the IP in the DNZ Zone each time it changes.
 
 Once you have done this your domain name or subdomain will be pointing towards your public IP, if port 80 and 443 are not currently listening for traffic then visiting your domain name will result in a timeout for now.
 
-## Install Nginx
+# Install Nginx
 
 Now it is time to install Nginx, follow the commands below to install the required software.
 
@@ -64,11 +64,11 @@ You can check the Nginx logs by using the following command:
 cat /var/log/nginx/error.log
 ```
 
-## Setup Port Forwarding
+# Setup Port Forwarding
 
 Now you have your domain pointing to your public IP, it is time to add a port forward, traffic to your network will be coming from port 80 (insecure) and secure. Although Nginx will bounce the insecure traffic to port 443, we still need to add a port forward for port 80 as well as 443. How you will do this will vary, but you need to find the area of your router that allows you to add port forwards, and then add one port forward for incoming insecure traffic to port 80 of the server, and one for port 443. This will open the HTTP ports on your router and forward the traffic to the same ports on your server. In the case someone tries to access using insecure protocol (http - port 80) they will be automatically be sent to the secure port of the server (https - 443)
 
-## Install Let's Encrypt
+# Install Let's Encrypt
 
 Security is everything, and it is even better when security is free ;) To encrypt our network we are going to use SSL provided by [Let’s Encrypt](https://letsencrypt.org/ "Let’s Encrypt"). Follow the commands below to set up Let’s Encrypt.
 
@@ -80,7 +80,7 @@ Security is everything, and it is even better when security is free ;) To encryp
 
 If you have followed above correctly you should now be able to access your website, but only using the secure protocol, 443, ie: https. If you visit your site you should now see the default Nginx page.
 
-## Install IPTables
+# Install IPTables
 
 Now you should install IPTables, to do this execute the following code:
 
@@ -117,7 +117,7 @@ Then save and reload:
  $ sudo service netfilter-persistent reload
 ```
 
-## Install MySql
+# Install MySql
 
 Now it is time to install MySql on your server. Follow the commands below and complete any required steps for the installation to accomplish this.
 
@@ -144,7 +144,13 @@ Also create a user for your application database.
  mysql> GRANT SELECT, INSERT, DELETE, CREATE  ON *.* TO 'YourNewUsername'@'localhost' IDENTIFIED BY 'YourNewPassword';
 ```
 
-## Install PHP
+Finally, create the required database:
+
+```
+ mysql> CREATE DATABASE YourDatabaseName
+```
+
+# Install PHP
 
 Now you will install PHP on your server. Follow the commands below and complete any required steps for the installation to accomplish this. You may need to swap 7.2 in the second command depending on what version of php-fpm is installed.
 
@@ -195,7 +201,7 @@ If you now visit the info page your website ie: https://www.YourDomain.com/info 
 
 ![GeniSys AI Server PHP config](images/PHP.jpg)
 
-## Install phpMyAdmin
+# Install phpMyAdmin
 
 Now you should install phpMyAdmin and upload the default MySql table configuration.
  
@@ -208,9 +214,41 @@ Press tab -> enter -> yes -> password, then create a link to phpMyAdmin, if you 
  $ sudo ln -s /usr/share/phpmyadmin /var/www/html
 ```
 
-Now you should be able to visit phpMyAdmin by accessing the relevant directory on your website.
+Now you should be able to visit phpMyAdmin by accessing the relevant directory on your website. 
 
-[![GeniSys AI Structure](images/GeniSys-Structure.png)](https://github.com/GeniSysAI)
+# Import MySql Databases
+
+First you can download the [basic database structure](https://github.com/GeniSysAI/Server/blob/0.0.1/requirements/database.sql "basic database structure") required for the GeniSys server, this structure will change frequently along with the rest of the project so you should keep an eye out for important changes. 
+
+Once you are logged in to phpMyAdmin, visit the import tab and import the sql file you just download and import it into the database you created earlier in the tutorial. 
+
+# Install iotJumpWay
+
+Now you need to install the iotJumpWay and setup some appications and devices. The following part of the tutorial will guide you through this. 
+
+- [Find out about the iotJumpWay](https://www.iotjumpway.tech/how-it-works "Find out about the iotJumpWay") 
+- [Find out about the iotJumpWay Dev Program](https://www.iotjumpway.tech/developers/ "Find out about the iotJumpWay Dev Program") 
+- [Get started with the iotJumpWay Dev Program](https://www.iotjumpway.tech/developers/getting-started "Get started with the iotJumpWay Dev Program") 
+
+[![iotJumpWay](images/iotJumpWayApplication.jpg)](https://www.iotJumpWay.tech/console)
+
+First of all you should [register your free iotJumpWay account](https://www.iotjumpway.tech/console/register "register your free iotJumpWay account"), all services provided by the iotJumpWay are also entirely free within fair limits. Once you have registered you need to:
+
+- Create your iotJumpWay location [(Documentation)](https://www.iotjumpway.tech/developers/getting-started-locations "(Documentation)") 
+- Create your iotJumpWay zones [(Documentation)](https://www.iotjumpway.tech/developers/getting-started-zones "(Documentation)")  
+- Create your iotJumpWay application [(Documentation)](https://www.iotjumpway.tech/developers/getting-started-applications "(Documentation)") 
+
+# Install Repository Code
+
+Now you can add the repository code to your server, to do this follow the guide:
+
+- Clone the repo to the desktop of your server, or your preferred location on your server. The repository files have the same paths they would have on your server. 
+- [/etc/nginx/sites-available/default](https://github.com/GeniSysAI/Server/blob/0.0.1/etc/nginx/sites-available/default  "/etc/nginx/sites-available/default") is an example of how your server NGINX configuration should look, located on your server in the same location as in the repo.
+- You can copy the entire contents of the [Server/0.0.1/var/www](https://github.com/GeniSysAI/Server/tree/0.0.1/var/www  "Server/0.0.1/var/www") directory to the /var/www directory on your server.
+
+# Update Configuration
+
+Now it is time to update our server configuration. Open the [/var/www/classes/startup/confs.json](https://github.com/GeniSysAI/Server/blob/0.0.1/var/www/classes/startup/confs.json  "/var/www/classes/startup/confs.json") file on your server and add your database credentials, your iotJumpWay application credentials, iotJumpWay location ID and Application MQTT credentials. You will use your iotJumpWay application credentials to authenticate yourself onto the UI. 
 
 # Contributing
 Please read **CONTRIBUTING.md** for details on our code of conduct, and the process for submitting pull requests to us.
