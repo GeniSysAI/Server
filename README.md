@@ -289,7 +289,7 @@ You need to use this URL in your Server Name configuration, so if your domain re
 
 Now that this is all set up, providing your API is live, you should be able to talk with your AI.
 
-[![NLU Interface](images/NLU-Interface.jpg)](NLU Interface)
+[![NLU Interface](images/NLU-Interface.jpg)](https://github.com/GeniSysAI/Server)
 
 # Contributing
 Please read **CONTRIBUTING.md** for details on our code of conduct, and the process for submitting pull requests to us.
