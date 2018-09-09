@@ -59,9 +59,15 @@ error_reporting(E_ALL);
             $this->_secCon      = $_secCon->dbcon;
             $this->_app         = $_secCon->config->JumpWayAppID;
             $this->_user        = $_secCon->config->JumpWayAppPublic;
+            $this->_location    = $_secCon->config->JumpWayLocation;
+            $this->_zone        = $_secCon->config->JumpWayZone;
+            $this->_device      = $_secCon->config->JumpWayDevice;
             $this->_auth        = $_secCon->config->JumpWayAppSecret;
             $this->_mqttUser    = $_secCon->config->JumpWayMqttUser;
             $this->_mqttPass    = $_secCon->config->JumpWayMqttPass;
+            $this->_dbname      = $_secCon->config->dbusername;
+            $this->_dbusername  = $_secCon->config->dbusername;
+            $this->_dbpassword  = $_secCon->config->dbpassword;
             $this->_pageDetails = $_pageDetails;
 
             include dirname(__FILE__) . '/../../classes/helpers.php'; 

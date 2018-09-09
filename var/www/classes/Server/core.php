@@ -37,12 +37,12 @@
 
             if(!filter_input(
                 INPUT_POST,
-                'jumpwayAPI',
+                'phpmyadmin',
                 FILTER_SANITIZE_STRING)):
 
                 return [
                     "Response"=>"FAILED",
-                    "ResponseMessage"=>"iotJumpWay API URL is required"
+                    "ResponseMessage"=>"phpmyadmin endpoint is required"
                 ];
 
             endif;
@@ -51,7 +51,7 @@
                 UPDATE a7fh46_settings
                 SET meta_title = :meta_title,
                     domainString = :domainString,
-                    jumpwayAPI = :jumpwayAPI 
+                    phpmyadmin = :phpmyadmin 
             ");
             $pdoQuery->execute([
                 ':meta_title' => filter_input(
@@ -62,9 +62,9 @@
                                     INPUT_POST,
                                     'domainString',
                                     FILTER_SANITIZE_STRING),
-                                    ':jumpwayAPI' => filter_input(
+                                    ':phpmyadmin' => filter_input(
                                         INPUT_POST,
-                                        'jumpwayAPI',
+                                        'phpmyadmin',
                                         FILTER_SANITIZE_STRING)
             ]);
             $pdoQuery->closeCursor();

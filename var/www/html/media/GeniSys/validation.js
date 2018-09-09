@@ -147,7 +147,7 @@ var validation = {
         
         return retVal;
     },
-    'submitValidation' : function(id)
+    'submitValidation' : function(id, toAppend = false, appendIt = null, appendItID = null)
     {
         submit=true;
 
@@ -195,29 +195,42 @@ var validation = {
 
         if(submit)
         {
+
             $.post( 
                 window.location.href, 
                 $("#"+id).closest("form").serialize(), 
                 function( ajaxResponse )
                 {  
+                    console.log("")
+                    console.log(ajaxResponse) 
+                    console.log("")
                     var ajaxResponse = jQuery.parseJSON(ajaxResponse);  
+                    console.log("")
                     switch (ajaxResponse.Response) 
                     {
                         case 'OK':
 
-                            setTimeout(function()
+                            switch (toAppend)
                             {
+                                case true:
 
-                                VoiceSynthesis.Speak(ajaxResponse.ResponseMessage)	
-                                setTimeout(function()
-                                {
+                                    $("#"+appendItID).prepend("GeniSys: " + ajaxResponse.ResponseData[0].Response+"<br />")
+                                    $("#humanInput").val("")
+
                                     if(ajaxResponse.Redirect)
                                     {
                                         location.reload(ajaxResponse.Redirect)
                                     }
-                                },1000); 
+                                    break;
 
-                            },1000); 
+                                default: 
+
+                                    if(ajaxResponse.Redirect)
+                                    {
+                                        location.reload(ajaxResponse.Redirect)
+                                    }
+                                    break;
+                            }
 
                             Logging.logMessage(
                                 "Core",
@@ -294,14 +307,63 @@ $('.container').on(
     '.password-validate',
     function(){ 
         validation.passwordValidation($(this).attr('id'));
-    });
+});
 
 $('.container').on(
     'click', 
     '#formSubmit',  
     function (e){
         e.preventDefault();
-        validation.submitValidation($(this).attr('id'));
+        
+        var toAppend   = false;
+        var appendIt   = $(this).closest("form").attr('append');
+        var appendItID = $(this).closest("form").attr('appendid');
+
+        if (typeof appendIt !== typeof undefined && appendIt !== false) 
+        {
+            var toAppend = true;
+            console.log(toAppend)
+            console.log(appendItID)
+        }
+
+        validation.submitValidation($(this).attr('id'), toAppend, appendIt, appendItID);
+});
+
+$('#wrapper').on(
+    'click', 
+    '#formSubmit',  
+    function (e){
+        e.preventDefault();
+        
+        var toAppend   = false;
+        var appendIt   = $(this).closest("form").attr('append');
+        var appendItID = $(this).closest("form").attr('appendid');
+
+        if (typeof appendIt !== typeof undefined && appendIt !== false) 
+        {
+            var toAppend = true;
+            $("#"+appendItID).prepend("Human: " + $("#humanInput").val()+"<br />");
+        }
+
+        validation.submitValidation($(this).attr('id'), toAppend, appendIt, appendItID);
+});
+
+$('#form').keypress(function (e) {
+    if (e.which == 13) {
+        
+        var toAppend   = false;
+        var appendIt   = $(this).closest("form").attr('append');
+        var appendItID = $(this).closest("form").attr('appendid');
+
+        if (typeof appendIt !== typeof undefined && appendIt !== false) 
+        {
+            var toAppend = true;
+            $("#"+appendItID).prepend("Human: " + $("#humanInput").val()+"<br />");
+        }
+
+        validation.submitValidation($(this).attr('id'), toAppend, appendIt, appendItID);
+        return false;
+    }
 });
 
 $(function(){
