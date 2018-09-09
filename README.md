@@ -177,7 +177,7 @@ Now you need to open the default configuration:
  $ sudo nano /etc/nginx/sites-available/default
 ```
 
-and match the [example default configuration](https://github.com/GeniSysAI/Server/blob/0.0.1/etc/nginx/sites-available/default "example default configuration"), replacing the domain name where relevant. Once you have completed those steps, issue the following commands which will tell you if the configuration is ok and if so you can reload Nginx. 
+and match the [example default configuration](https://github.com/GeniSysAI/Server/blob/master/etc/nginx/sites-available/default "example default configuration"), replacing the domain name where relevant. Once you have completed those steps, issue the following commands which will tell you if the configuration is ok and if so you can reload Nginx. 
 
 ```
  $ sudo nginx -t
@@ -249,12 +249,47 @@ To install the iotJumpWay MQTT software issue the following command on your serv
 Now you can add the repository code to your server, to do this follow the guide:
 
 - Clone the repo to the desktop of your server, or your preferred location on your server. The repository files have the same paths they would have on your server. 
-- [/etc/nginx/sites-available/default](https://github.com/GeniSysAI/Server/blob/0.0.1/etc/nginx/sites-available/default  "/etc/nginx/sites-available/default") is an example of how your server NGINX configuration should look, located on your server in the same location as in the repo.
+- [/etc/nginx/sites-available/default](https://github.com/GeniSysAI/Server/blob/master/etc/nginx/sites-available/default  "/etc/nginx/sites-available/default") is an example of how your server NGINX configuration should look, located on your server in the same location as in the repo.
 - You can copy the entire contents of the [Server/0.0.1/var/www](https://github.com/GeniSysAI/Server/tree/0.0.1/var/www  "Server/0.0.1/var/www") directory to the /var/www directory on your server.
 
 # Update Configuration
 
 Now it is time to update our server configuration. Open the [/var/www/classes/startup/confs.json](https://github.com/GeniSysAI/Server/blob/0.0.1/var/www/classes/startup/confs.json  "/var/www/classes/startup/confs.json") file on your server and add your database credentials, your iotJumpWay application credentials, iotJumpWay location ID and Application MQTT credentials. You will use your iotJumpWay application credentials to authenticate yourself onto the UI. 
+
+# Connect To Your NLU
+
+For this part you need to have followed the [GeniSys NLU](https://github.com/GeniSysAI/NLU  "GeniSys NLU") tutorial. If you have not completed the set up of your NLU engine you should follow that tutorial and ensure that the NLU engine API is online and listening / processing requests correctly. 
+
+## Server Settings
+
+First we need to visit the the Server Settings page, from the UI menu you can click on Server. Here you need to add the Server Name which is your choice of name to identify your server in the system, this will also be used as the meta title for your UI pages, then you need to update your Server URL, which is your fully qualified domain name (FQDN), and then finally the name that you used whilst setting up NGINX and PHP MyAdmin, now hit submit, if you do not see an error message, all is well.
+
+## iotJumpWay Settings
+
+The iotJumpWay Settings are already configured and pointing to the base URL for the API of http://www.iotJumpWay.tech.
+
+## NLU Settings
+
+Now you need to go to your NLU and attach the iotJumpWay device for the NLU that you created whilst setting up the NLU engine, once attached you will be able to add the base URL for your NLU engine API. Before we do that I will explain some things here, this assumes you used the default NGINX configuration provided, [/etc/nginx/sites-available/default](https://github.com/GeniSysAI/Server/blob/master/etc/nginx/sites-available/default  "/etc/nginx/sites-available/default").
+
+You will notice the following code in your NGINX server configuration:
+
+```
+root /var/www/html;
+server_name Subdomain.Domain.TLD;
+
+location ~ ^/communicate/ {
+    proxy_pass http://###.###.#.###:5824/$uri$is_args$args;
+}
+```
+
+Basically what this does is proxies any secure traffic to the communicate endpoint to the local flask server serving your NLU engine API. Important to note that you must replace Subdomain.Domain.TLD with your subdomain domain name and TLD (Top Level Domain).
+
+You need to use this URL in your Server Name configuration, so if your domain really was Subdomain.Domain.TLD, then your NLU would be accessible via https://Subdomain.Domain.TLD/communicate/. In our case our NLU API will be listening for JSON posts to the /communicate/infer/USERID endpoint, processing them and returning the classifications, so our full API url would be https://Subdomain.Domain.TLD/communicate/infer/USERID but the application handles the endpoints depending on what action is being taken. 
+
+Now that this is all set up, providing your API is live, you should be able to talk with your AI.
+
+[![NLU Interface](images/NLU-Interface.jpg)](NLU Interface)
 
 # Contributing
 Please read **CONTRIBUTING.md** for details on our code of conduct, and the process for submitting pull requests to us.

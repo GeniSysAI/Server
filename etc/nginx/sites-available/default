@@ -21,8 +21,15 @@
 server {
 
 	root /var/www/html;
-
 	server_name Subdomain.Domain.TLD;
+
+	location ~ ^/communicate/ {
+		proxy_pass http://###.###.#.###:5824/$uri$is_args$args;
+	}
+
+	location ~ ^/tensorboard/ {
+		proxy_pass http://###.###.#.###:6006/$uri$is_args$args;
+	}
 
 	location / {
 		try_files $uri $uri.html $uri/ @extensionless-php;
@@ -34,6 +41,7 @@ server {
 		include snippets/fastcgi-php.conf;
 		fastcgi_pass unix:/run/php/php7.2-fpm.sock;
 	}
+
 
 	location @extensionless-php {
 		rewrite ^(.*)$ $1.php last;
