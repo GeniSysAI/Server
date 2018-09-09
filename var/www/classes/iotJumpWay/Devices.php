@@ -9,7 +9,7 @@
             $this->_GeniSys = $_GeniSys;
         }
         
-        function apiCall($method, $endpoint, $data)
+        private function apiCall($method, $endpoint, $data)
         {
             $curl = curl_init();
             $url  = $this->_GeniSys->_confs["jumpWayAPI"]."/API/REST/".$endpoint;
