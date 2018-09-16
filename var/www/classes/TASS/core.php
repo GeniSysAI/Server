@@ -193,30 +193,6 @@
             curl_close($curl);
             return $result;
         }
-        
-        public function talkToTASS()
-        {  
-            if(!filter_input(
-                INPUT_POST,
-                'humanInput',
-                FILTER_SANITIZE_STRING)):
-
-                return [
-                    "Response"=>"FAILED",
-                    "ResponseMessage"=>"Human input is required"
-                ];
-
-            endif;
-
-            $response = $this->apiCall(
-                "POST", 
-                "infer/1", 
-                [
-                    "query" => filter_input(INPUT_POST, 'humanInput', FILTER_SANITIZE_STRING)
-                ],
-                "application/json");
-            return $response;
-        }
     }
 
 $_TASS = new TASS($_GeniSys); 
@@ -233,11 +209,4 @@ if(filter_input(
     'ftype',
     FILTER_SANITIZE_STRING)=="updateTASSlocal"):
         die(json_encode($_TASS->updateTASSlocal()));
-endif;
-
-if(filter_input(
-    INPUT_POST,
-    'ftype',
-    FILTER_SANITIZE_STRING)=="nluInteract"):
-        die($_TASS->talkToTASS());
 endif;
