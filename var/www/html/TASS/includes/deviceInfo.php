@@ -4,7 +4,7 @@
                 
                             <div class="panel-heading">
                 
-                                <i class="fa fa-exclamation fa-fw"></i> TASS Device Info
+                                <i class="fa fa-exclamation fa-fw"></i> TASS Local Device Info
                 
                             </div>
                             

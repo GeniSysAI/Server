@@ -326,13 +326,13 @@ Now that this is all set up, providing your API is live, you should be able to t
 
 [![NLU Interface](images/NLU-Interface.jpg)](https://github.com/GeniSysAI/Server)
 
-# Interacting With TASS Computer Vision
+# Interacting With TASS Local Computer Vision
 
 The core and remote computer vision systems used by GeniSys are based on [TASS AI](https://www.tassai.tech "TASS AI"), if you have set up your [GeniSys AI Server](https://github.com/GeniSysAI/Server "GeniSys AI Server") and granted camera permissions to the UI, you will be able to see your self on the new dashboard. You can communicate with the NLU engine via the chat window to the right of the camera stream.
 
 A new feature recently added to the upcoming 0.0.3 release is the ability for you to ask the AI who you are. This feature uses a combination of the iotJumpWay TASS REST API, the local server camera and TASS to determine who it saw in the last 10 seconds. 
 
-[![Interacting With TASS Computer Vision](images/computer-vision.jpg)](https://github.com/GeniSysAI/Vision)
+[![Interacting With TASS Local Computer Vision](images/computer-vision.jpg)](https://github.com/GeniSysAI/Vision/tree/master/Local)
 
 Each time a TASS device detects a known human or an intruder it updates the iotJumpWay enabling you to keep track as they move around the house, this allows the network to know where people at any one time as long as there are TASS units set up in each room. 
 
@@ -340,7 +340,17 @@ Using an action, the system will contact the iotJumpWay securely and retrieve an
 
 These features are the first steps towards a system wide user management system which will include emotional analysis and a number of other features.
 
-# Contributing
+# Managing Your TASS Local Camera
+
+The latest push to 0.0.1 allows you to connect your TASS Local camera to the UI and update the stream URL (Required for the system to work) 
+
+[![Managing Your TASS Local Camera](images/TASS-Settings.jpg)](https://github.com/GeniSysAI/Server/tree/0.0.1/var/www/html/TASS)
+
+You can also watch the live stream of your TASS Local camera:
+
+[![Managing Your TASS Local Camera](images/TASS-Local-View.jpg)](https://github.com/GeniSysAI/Server/tree/0.0.1/var/www/html/TASS)
+
+# Contributing 
 Please read **CONTRIBUTING.md** for details on our code of conduct, and the process for submitting pull requests to us.
 
 # Versioning
