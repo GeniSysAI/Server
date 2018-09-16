@@ -68,6 +68,7 @@ error_reporting(E_ALL);
             $this->_dbname      = $_secCon->config->dbusername;
             $this->_dbusername  = $_secCon->config->dbusername;
             $this->_dbpassword  = $_secCon->config->dbpassword;
+            $this->_tassURL     = $_secCon->config->TassURL;
             $this->_pageDetails = $_pageDetails;
 
             include dirname(__FILE__) . '/../../classes/helpers.php'; 

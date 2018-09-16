@@ -7,6 +7,7 @@ $pageDetails = [
 include dirname(__FILE__) . '/../classes/startup/init.php';
 include dirname(__FILE__) . '/../classes/users/core.php';
 include dirname(__FILE__) . '/../classes/Server/core.php';
+include dirname(__FILE__) . '/../classes/NLU/core.php';
 
 #print_r($_SESSION);
 #session_destroy();
@@ -73,25 +74,61 @@ $_users->checkSession();
 
                     <div class="col-lg-8">
 
-                        <div class="panel panel-default">
+                        <div class="col-lg-6">
 
-                            <div class="panel-heading">
+                            <div class="panel panel-default">
 
-                                <i class="fa fa-cogs fa-fw"></i> 
+                                <div class="panel-heading">
 
-                                <div class="pull-right">
+                                    <i class="fa fa-cogs fa-fw"></i> 
 
-                                    <div class="btn-group">
+                                    <div class="pull-right">
+
+                                        <div class="btn-group"></div>
 
                                     </div>
 
                                 </div>
+                                
+                                <div class="panel-body">
 
-                            </div>
-                            
-                            <div class="panel-body">
+                                <img src="<?=$_GeniSys->_tassURL; ?>/<?=time(); ?>.mjpg"  style="width: 100%;" />
 
+                                </div>
+                                
                             </div>
+
+                        </div>
+                        <div class="col-lg-6">
+
+                            <?php 
+                                if($_GeniSys->_confs["nluID"]):
+                            ?>
+
+                            <div id="GeniSysChat" style="width: 100%; height: 250px; border: 1px solid #ccc; padding 5px; overflow: hidden; overflow-y: scroll;"></div>
+
+                            <form role="form" id="form" append="true" appendid="GeniSysChat" >
+
+                                <div class="form-group">
+                                    <label>Talk to your AI</label>
+                                    <input type="text" id="humanInput" name="humanInput" class="form-control text-validate" autofocus>
+                                    <p class="help-block">Enter a sentence above and send it to the AI using the submit button below.</p>
+                                </div>
+
+                                <input type="hidden" id="ftype" name="ftype" value="nluInteract" /> 
+                                <a class="btn btn-default" id="formSubmit">Submit</a>
+
+                            </form>
+
+                            <?php 
+                                else:
+                            ?>
+
+                            You need to setup your NLU and iotJumpWay device before you can interact with your NLU.
+
+                            <?php 
+                                endif;
+                            ?>
                             
                         </div>
                         

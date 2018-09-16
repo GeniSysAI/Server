@@ -242,10 +242,28 @@ var validation = {
 
                         default: 
 
+                            switch (toAppend)
+                            {
+                                case true:
+
+                                    $("#"+appendItID).prepend("GeniSys: " + ajaxResponse.ResponseData[0].Response+"<br />")
+                                    $("#humanInput").val("")
+
+                                    if(ajaxResponse.Redirect)
+                                    {
+                                        location.reload(ajaxResponse.Redirect)
+                                    }
+                                    break;
+
+                                default: 
+                                    break;
+                            }
+
                             setTimeout(function()
                             {	
                                 VoiceSynthesis.Speak(ajaxResponse.ResponseMessage)	
                             },1000); 
+
 
                             Logging.logMessage(
                                 "Core",
