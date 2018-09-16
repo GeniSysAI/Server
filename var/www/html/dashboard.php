@@ -92,7 +92,7 @@ $_users->checkSession();
                                 
                                 <div class="panel-body">
 
-                                <img src="<?=$_GeniSys->_tassURL; ?>/<?=time(); ?>.mjpg"  style="width: 100%;" />
+                                <img src="<?=$_GeniSys->_confs["tassAddress"]; ?>/<?=time(); ?>.mjpg"  style="width: 100%;" />
 
                                 </div>
                                 

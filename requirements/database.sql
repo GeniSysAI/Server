@@ -56,6 +56,7 @@ CREATE TABLE `a7fh46_settings` (
   `nluID` int(11) NOT NULL,
   `nluAddress` varchar(255) NOT NULL,
   `tassID` int(11) NOT NULL,
+  `tassAddress` varchar(255) NOT NULL,
   `tassDevices` int(11) NOT NULL,
   `jumpwayAPI` varchar(255) NOT NULL,
   `phpmyadmin` varchar(255) NOT NULL,
@@ -69,8 +70,9 @@ CREATE TABLE `a7fh46_settings` (
 -- Dumping data for table `a7fh46_settings`
 --
 
-INSERT INTO `a7fh46_settings` (`id`, `version`, `nluID`, `nluAddress`, `tassID`, `tassDevices`, `jumpwayAPI`, `phpmyadmin`, `meta_title`, `meta_description`, `meta_keywords`, `domainString`) VALUES
-(1, '0.0.3', 0, '', 0, 0, 'http://www.iotJumpWay.tech', '', 'GeniSys AI', 'GeniSys AI', 'GeniSys AI', '');
+INSERT INTO `a7fh46_settings` (`id`, `version`, `nluID`, `nluAddress`, `tassID`, `tassAddress`, `tassDevices`, `jumpwayAPI`, `phpmyadmin`, `meta_title`, `meta_description`, `meta_keywords`, `domainString`) VALUES
+(1, '0.0.3', 0, '', 0, '', 0, 'http://www.iotJumpWay.tech', '', 'GeniSys AI', 'GeniSys AI', 'GeniSys AI', '');
+
 
 --
 -- Indexes for dumped tables

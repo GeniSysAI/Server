@@ -45,7 +45,10 @@
                                 <a href="<?=$_GeniSys->_confs["domainString"]; ?>/NLU/"><i class="fa fa-commenting-o fa-fw"></i> NLU</a>
                             </li>
                             <li>
-                                <a href="<?=$_GeniSys->_confs["domainString"]; ?>/TASS/"><i class="fa fa-eye fa-fw"></i> TASS</a>
+                                <a href="<?=$_GeniSys->_confs["domainString"]; ?>/TASS/"><i class="fa fa-eye fa-fw"></i> TASS Local</a>
+                            </li>
+                            <li>
+                                <a href="<?=$_GeniSys->_confs["domainString"]; ?>/TASS/Foscam"><i class="fa fa-eye fa-fw"></i> TASS Foscam</a>
                             </li>
                             <li>
                                 <a href="<?=$_GeniSys->_confs["domainString"]; ?>/Users/"><i class="fa fa-users fa-fw"></i> Users</a>
