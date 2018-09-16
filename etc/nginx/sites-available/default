@@ -21,7 +21,7 @@
 server {
 
 	root /var/www/html;
-	server_name yghfu7rfhkk.genisys.host;
+	server_name YourSubdomain.YourDomain.TLD;
 
         location ~ ^/communicate/ {
                 proxy_pass http://###.###.##.###:5824/$uri$is_args$args;
@@ -75,7 +75,7 @@ server {
 
 server {
 
-	if ($host = yghfu7rfhkk.genisys.host){
+	if ($host = YourSubdomain.YourDomain.TLD){
 		return 301 https://$host$request_uri;
 	} # managed by Certbot
 
@@ -83,7 +83,7 @@ server {
         listen 80 default_server;
         listen [::]:80 default_server;
 
-        server_name yghfu7rfhkk.genisys.host;
+        server_name YourSubdomain.YourDomain.TLD;
 	return 404; # managed by Certbot
 
 }
