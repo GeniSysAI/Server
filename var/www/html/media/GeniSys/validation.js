@@ -204,17 +204,27 @@ var validation = {
                     console.log("")
                     console.log(ajaxResponse) 
                     console.log("")
-                    var ajaxResponse = jQuery.parseJSON(ajaxResponse);  
+                    var ajaxResponse = jQuery.parseJSON(ajaxResponse); 
+                    console.log(ajaxResponse.ResponseData[0].Response);    
                     console.log("")
                     switch (ajaxResponse.Response) 
                     {
                         case 'OK':
-
+                        
                             switch (toAppend)
                             {
                                 case true:
 
-                                    $("#"+appendItID).prepend("GeniSys: " + ajaxResponse.ResponseData[0].Response+"<br />")
+                                    if(ajaxResponse['isArray'])
+                                    {
+                                        presponse = ajaxResponse.ResponseData[0].Response
+                                    }
+                                    else
+                                    {
+                                        presponse = ajaxResponse.ResponseData.Response
+                                    }
+
+                                    $("#"+appendItID).prepend("GeniSys: " + presponse +"<br />") 
                                     $("#humanInput").val("")
 
                                     if(ajaxResponse.Redirect)
@@ -246,7 +256,16 @@ var validation = {
                             {
                                 case true:
 
-                                    $("#"+appendItID).prepend("GeniSys: " + ajaxResponse.ResponseData[0].Response+"<br />")
+                                    if(ajaxResponse['isArray'])
+                                    {
+                                        presponse = ajaxResponse.ResponseData[0].Response
+                                    }
+                                    else
+                                    {
+                                        presponse = ajaxResponse.ResponseData.Response
+                                    }
+
+                                    $("#"+appendItID).prepend("GeniSys: " + presponse +"<br />") 
                                     $("#humanInput").val("")
 
                                     if(ajaxResponse.Redirect)

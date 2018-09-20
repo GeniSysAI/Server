@@ -88,6 +88,19 @@ GeniSys.AsyncLoad(
             "VoiceSynthesis Script Loaded"
         );
     });
+
+GeniSys.AsyncLoad(
+    '/media/GeniSys/VoiceRecognition.js',
+    'VoiceSynthesis', 
+    function(){
+        VoiceRecognition = VoiceRecognition
+        sessionStorage.VoiceRecognitionLoaded=true
+        Logging.logMessage(
+            "Core",
+            "VoiceRecognition",
+            "VoiceRecognition Script Loaded"
+        );
+    });
     
 GeniSys.AsyncLoad(
     '/media/GeniSys/validation.js',
