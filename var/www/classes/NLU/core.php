@@ -207,7 +207,7 @@
                 ];
 
             endif;
-
+            $response = [];
             $response = $this->apiCall(
                 "POST", 
                 "infer/1", 
@@ -239,5 +239,12 @@ if(filter_input(
     INPUT_POST,
     'ftype',
     FILTER_SANITIZE_STRING)=="nluInteract"):
+        die($_NLU->talkToNLU());
+endif;
+
+if(filter_input(
+    INPUT_POST,
+    'ftype',
+    FILTER_SANITIZE_STRING)=="genisysInference"):
         die($_NLU->talkToNLU());
 endif;

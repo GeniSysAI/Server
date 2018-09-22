@@ -8,11 +8,21 @@ var VoiceRecognition = {
 		annyang.addCallback('resultNoMatch', function(userSaid) { console.log(userSaid)
 			
 			console.log(userSaid)
-			$.post( window.location.href , 'ftype=genisysInference&recognizedText='+userSaid[0]+'&isVoice=1', function( Response )
+			$("#GeniSysChat").prepend("Human: " + userSaid[0] +"<br />") 
+			$.post( window.location.href , 'ftype=genisysInference&humanInput='+userSaid[0]+'&isVoice=1', function( Response )
 			{ 
 				console.log(Response)
 				var Response = jQuery.parseJSON( Response ); 
-				//console.log("Stil speaking")
+				presponse    = Response.ResponseData[0].Response
+				console.log(Response.ResponseData)
+
+				$("#GeniSysChat").prepend("GeniSys: " + presponse +"<br />") 
+				$("#humanInput").val("")
+
+				if(Response.Redirect)
+				{
+					location.reload(Response.Redirect)
+				}
 				
 			});
 			

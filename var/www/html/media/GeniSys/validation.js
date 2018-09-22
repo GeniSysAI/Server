@@ -205,7 +205,6 @@ var validation = {
                     console.log(ajaxResponse) 
                     console.log("")
                     var ajaxResponse = jQuery.parseJSON(ajaxResponse); 
-                    console.log(ajaxResponse.ResponseData[0].Response);    
                     console.log("")
                     switch (ajaxResponse.Response) 
                     {
@@ -215,13 +214,14 @@ var validation = {
                             {
                                 case true:
 
-                                    if(ajaxResponse['isArray'])
+                                    if(ajaxResponse.ResponseData instanceof Array)
                                     {
-                                        presponse = ajaxResponse.ResponseData[0].Response
+                                        presponse = ajaxResponse.ResponseData[0].Response 
                                     }
                                     else
                                     {
                                         presponse = ajaxResponse.ResponseData.Response
+                                        console.log(ajaxResponse.ResponseData[0].Response);   
                                     }
 
                                     $("#"+appendItID).prepend("GeniSys: " + presponse +"<br />") 
@@ -256,7 +256,7 @@ var validation = {
                             {
                                 case true:
 
-                                    if(ajaxResponse['isArray'])
+                                    if(ajaxResponse.ResponseData instanceof Array)
                                     {
                                         presponse = ajaxResponse.ResponseData[0].Response
                                     }
