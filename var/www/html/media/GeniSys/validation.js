@@ -221,8 +221,9 @@ var validation = {
                                     else
                                     {
                                         presponse = ajaxResponse.ResponseData.Response
-                                        console.log(ajaxResponse.ResponseData[0].Response);   
                                     }
+
+                                    VoiceSynthesis.Speak(presponse);
 
                                     $("#"+appendItID).prepend("GeniSys: " + presponse +"<br />") 
                                     $("#humanInput").val("")
@@ -265,6 +266,8 @@ var validation = {
                                         presponse = ajaxResponse.ResponseData.Response
                                     }
 
+                                    VoiceSynthesis.Speak(presponse);
+
                                     $("#"+appendItID).prepend("GeniSys: " + presponse +"<br />") 
                                     $("#humanInput").val("")
 
@@ -277,13 +280,7 @@ var validation = {
                                 default: 
                                     break;
                             }
-
-                            setTimeout(function()
-                            {	
-                                VoiceSynthesis.Speak(ajaxResponse.ResponseMessage)	
-                            },1000); 
-
-
+                            
                             Logging.logMessage(
                                 "Core",
                                 "Forms",
@@ -351,6 +348,8 @@ $('.container').on(
     '#formSubmit',  
     function (e){
         e.preventDefault();
+
+        console.log("here")
         
         var toAppend   = false;
         var appendIt   = $(this).closest("form").attr('append');

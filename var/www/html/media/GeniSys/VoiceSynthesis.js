@@ -6,32 +6,29 @@
 // 
 /////////////////////////////////////////////////////////
 
-var VoiceSynthesis = {
-	'synth'    : window.speechSynthesis,
-	'settings' : 
-	{
-		'inputForm'   : document.querySelector('form'),
-		'inputTxt'    : document.querySelector('.txt'),
-		'voiceSelect' : document.querySelector('select'),
-		'pitch'       : document.querySelector('#pitch'),
-		'pitchValue'  : document.querySelector('.pitch-value'),
-		'rate'        : document.querySelector('#rate'),
-		'rateValue'   : document.querySelector('.rate-value')
-	},
+var VoiceSynthesis = 
+{
+	'synthesis'    : window.speechSynthesis,
 	'Speak' : function (text)
 	{
-		var voices = window.speechSynthesis.getVoices();
-		var msg = new SpeechSynthesisUtterance();
-		msg.voice = voices[10];
-		msg.voiceURI = 'system';
-		msg.volume = 1; 
-		msg.rate = 1; 
-		msg.pitch = 1;
-		msg.lang = 'en-US';
-		this.synth.speak(msg);
+		sessionStorage.speakingState=true
+		VoiceRecognition.pause()
+		var VSynth = new SpeechSynthesisUtterance(text);
+		var voices = this.synthesis.getVoices()
+
+		VSynth.voice = voices[1];
+		VSynth.pitch = 1;
+		VSynth.rate = 1;
+		this.synthesis.speak(VSynth);
+
+		VSynth.onend = function(event) 
+		{
+			VoiceRecognition.resume()
+			sessionStorage.speakingState=false
+		}
 	}, 
 	'StopSpeaking' :  function()
 	{
-        this.synth.cancel();
+        this.synthesis.cancel();
     } 
 }
