@@ -350,6 +350,8 @@ You can also watch the live stream of your TASS Local camera:
 
 [![Managing Your TASS Local Camera](images/TASS-Local-View.jpg)](https://github.com/GeniSysAI/Server/tree/0.0.1/var/www/html/TASS)
 
+[![Managing Your TASS Local Camera](images/TASS-Local-View-Main.jpg)](https://github.com/GeniSysAI/Server/tree/0.0.1/var/www/html/TASS)
+
 # Voice Recognition
 
 It is now possible to interact with GeniSys using your voice. This feature is powered by an open source project [annyang](https://github.com/TalAter/annyang "annyang") which is basically a wrapper for the voice recognition feature of the web speech API, according to  [caniuse](https://caniuse.com/#feat=speech-synthesis "caniuse") support seems to be finally much wider including: Edge, Firefox, Chrome, Safari, ios Safari, Chrome for Android and Samsung Internet, but I have not tested anything other than Chrome. In Chrome for Android an alert noise is made every time the voice recognition restarts, this is unavoidable and there has been a long time developer request for Google to remove this feature but Google are adimant that it will remain. 
