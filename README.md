@@ -1,7 +1,8 @@
 # GeniSys AI Server
 [![GeniSys AI Server](images/GeniSys.png)](https://github.com/GeniSysAI/Server)
 
-[![UPCOMING RELEASE](https://img.shields.io/badge/UPCOMING%20RELEASE-0.0.1-blue.svg)](https://github.com/GeniSysAI/Server/tree/0.0.1)
+[![CURRENT RELEASE](https://img.shields.io/badge/CURRENT%20RELEASE-0.0.1-blue.svg)](https://github.com/GeniSysAI/Server/tree/0.0.1)
+[![UPCOMING RELEASE](https://img.shields.io/badge/UPCOMING%20RELEASE-0.0.2-blue.svg)](https://github.com/GeniSysAI/Server/tree/0.0.2)
 
 # About GeniSys AI
 
