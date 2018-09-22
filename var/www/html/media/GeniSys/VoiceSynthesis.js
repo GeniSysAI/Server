@@ -16,7 +16,7 @@ var VoiceSynthesis =
 		var VSynth = new SpeechSynthesisUtterance(text);
 		var voices = this.synthesis.getVoices()
 
-		VSynth.voice = voices[1];
+		VSynth.voice = voices[3];
 		VSynth.pitch = 1;
 		VSynth.rate = 1;
 		this.synthesis.speak(VSynth);
