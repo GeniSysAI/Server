@@ -104,33 +104,8 @@ $_users->checkSession();
                     <div class="col-lg-8">
                 
                         <div class="row"> 
-
-                            <div class="col-lg-6">
-
-                                <div class="panel panel-default">
-
-                                    <div class="panel-heading">
-
-                                        <i class="fa fa-eye fa-fw"></i> LOCAL TASS
-
-                                        <div class="pull-right">
-
-                                            <div class="btn-group"></div>
-
-                                        </div>
-
-                                    </div>
-                                    
-                                    <div class="panel-body">
-
-                                        <img src="<?=$_GeniSys->_confs["tassAddress"]; ?>/<?=time(); ?>.mjpg"  style="width: 100%;" />
-
-                                    </div>
-                                    
-                                </div>
-
-                            </div>
-                            <div class="col-lg-6">
+                        
+                            <div class="col-lg-12">
                             
 
                                 <div class="panel panel-default">
@@ -153,7 +128,7 @@ $_users->checkSession();
                                             if($_GeniSys->_confs["nluID"]):
                                         ?>
 
-                                        <div id="GeniSysChat" style="width: 100%; height: 250px; border: 1px solid #ccc; padding 5px; overflow: hidden; overflow-y: scroll;"></div>
+                                        <div id="GeniSysChat" style="width: 100%; height: 500px; border: 1px solid #ccc; padding 5px; overflow: hidden; overflow-y: scroll;"></div>
 
                                         <form role="form" id="form" append="true" appendid="GeniSysChat" >
 
@@ -187,6 +162,28 @@ $_users->checkSession();
                         
                     </div>
                     <div class="col-lg-4">
+
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading">
+
+                                <i class="fa fa-eye fa-fw"></i> LOCAL TASS
+
+                                <div class="pull-right">
+
+                                    <div class="btn-group"></div>
+
+                                </div>
+
+                            </div>
+                            
+                            <div class="panel-body">
+
+                                <img src="<?=$_GeniSys->_confs["tassAddress"]; ?>/<?=time(); ?>.mjpg"  style="width: 100%;" />
+
+                            </div>
+                            
+                        </div>
 
                         <?php  include dirname(__FILE__) . '/Server/includes/serverInfo.php'; ?>
 
