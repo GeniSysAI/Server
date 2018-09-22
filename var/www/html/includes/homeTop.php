@@ -102,10 +102,10 @@
 
                             </div>
                         
-                            <a href="<?=$_GeniSys->_confs["domainString"]; ?>/Devices/TASS/">
+                            <a href="<?=$_GeniSys->_confs["domainString"]; ?>/TASS/">
                                 <div class="panel-footer">
 
-                                    <span class="pull-left">Manage Devices</span>
+                                    <span class="pull-left">Manage TASS Local</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
 

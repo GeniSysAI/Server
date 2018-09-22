@@ -17,13 +17,13 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
 
-                                        <div class="huge">NLU</div>
+                                        <div class="huge">TASS</div>
                                         <div>Settings</div>
 
                                     </div>
                                 </div>
                             </div>
-                            <a href="<?=$_GeniSys->_confs["domainString"]; ?>/NLU/">
+                            <a href="<?=$_GeniSys->_confs["domainString"]; ?>/TASS/">
 
                                 <div class="panel-footer">
 
@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
 
-                                        <div class="huge">NLU</div>
+                                        <div class="huge">TASS</div>
                                         <div>Interact</div>
 
                                     </div>
@@ -62,10 +62,10 @@
 
                             </div>
                             
-                            <a href="<?=$_GeniSys->_confs["domainString"]; ?>/NLU/interact">
+                            <a href="<?=$_GeniSys->_confs["domainString"]; ?>/TASS/local">
                                 <div class="panel-footer">
 
-                                    <span class="pull-left">Interact With NLU</span>
+                                    <span class="pull-left">Watch TASS Local Stream</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
 

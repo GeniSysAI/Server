@@ -9,5 +9,6 @@
     "JumpWayZone" : 0,
     "JumpWayDevice" : 0,
     "JumpWayMqttUser"  : "",
-    "JumpWayMqttPass"  : ""
+    "JumpWayMqttPass"  : "",
+    "TassURL"  : ""  
 }

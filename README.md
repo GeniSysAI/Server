@@ -1,7 +1,8 @@
 # GeniSys AI Server
 [![GeniSys AI Server](images/GeniSys.png)](https://github.com/GeniSysAI/Server)
 
-[![UPCOMING RELEASE](https://img.shields.io/badge/UPCOMING%20RELEASE-0.0.1-blue.svg)](https://github.com/GeniSysAI/Server/tree/0.0.1)
+[![CURRENT RELEASE](https://img.shields.io/badge/CURRENT%20RELEASE-0.0.1-blue.svg)](https://github.com/GeniSysAI/Server/tree/0.0.1)
+[![UPCOMING RELEASE](https://img.shields.io/badge/UPCOMING%20RELEASE-0.0.2-blue.svg)](https://github.com/GeniSysAI/Server/tree/0.0.2)
 
 # About GeniSys AI
 
@@ -326,7 +327,39 @@ Now that this is all set up, providing your API is live, you should be able to t
 
 [![NLU Interface](images/NLU-Interface.jpg)](https://github.com/GeniSysAI/Server)
 
-# Contributing
+# Interacting With TASS Local Computer Vision
+
+The core and remote computer vision systems used by GeniSys are based on [TASS AI](https://www.tassai.tech "TASS AI"), if you have set up your [GeniSys AI Server](https://github.com/GeniSysAI/Server "GeniSys AI Server") and granted camera permissions to the UI, you will be able to see your self on the new dashboard. You can communicate with the NLU engine via the chat window to the right of the camera stream.
+
+A new feature recently added to the upcoming 0.0.3 release is the ability for you to ask the AI who you are. This feature uses a combination of the iotJumpWay TASS REST API, the local server camera and TASS to determine who it saw in the last 10 seconds. 
+
+[![Interacting With TASS Local Computer Vision](images/computer-vision.jpg)](https://github.com/GeniSysAI/Vision/tree/master/Local)
+
+Each time a TASS device detects a known human or an intruder it updates the iotJumpWay enabling you to keep track as they move around the house, this allows the network to know where people at any one time as long as there are TASS units set up in each room. 
+
+Using an action, the system will contact the iotJumpWay securely and retrieve any and all people it saw in the last five seconds. If it has not seen any one it will ask the user to look at the camera. 
+
+These features are the first steps towards a system wide user management system which will include emotional analysis and a number of other features.
+
+# Managing Your TASS Local Camera
+
+The latest push to 0.0.1 allows you to connect your TASS Local camera to the UI and update the stream URL (Required for the system to work) 
+
+[![Managing Your TASS Local Camera](images/TASS-Settings.jpg)](https://github.com/GeniSysAI/Server/tree/0.0.1/var/www/html/TASS)
+
+You can also watch the live stream of your TASS Local camera:
+
+[![Managing Your TASS Local Camera](images/TASS-Local-View-Main.jpg)](https://github.com/GeniSysAI/Server/tree/0.0.1/var/www/html/TASS)
+
+[![Managing Your TASS Local Camera](images/TASS-Local-View.jpg)](https://github.com/GeniSysAI/Server/tree/0.0.1/var/www/html/TASS)
+
+# Voice Recognition
+
+It is now possible to interact with GeniSys using your voice. This feature is powered by an open source project [annyang](https://github.com/TalAter/annyang "annyang") which is basically a wrapper for the voice recognition feature of the web speech API, according to  [caniuse](https://caniuse.com/#feat=speech-synthesis "caniuse") support seems to be finally much wider including: Edge, Firefox, Chrome, Safari, ios Safari, Chrome for Android and Samsung Internet, but I have not tested anything other than Chrome. In Chrome for Android an alert noise is made every time the voice recognition restarts, this is unavoidable and there has been a long time developer request for Google to remove this feature but Google are adimant that it will remain. 
+
+If you have updated your server code and booted up the server you should get asked for permissions to use the microphone, once you accept you will be able to speak to your NLU providing the NLU is online.
+
+# Contributing 
 Please read **CONTRIBUTING.md** for details on our code of conduct, and the process for submitting pull requests to us.
 
 # Versioning

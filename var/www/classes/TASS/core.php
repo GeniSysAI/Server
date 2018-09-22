@@ -1,6 +1,6 @@
 <?php 
 
-    class NLU
+    class TASS
     {
         private $_GeniSys = null;
         
@@ -9,7 +9,7 @@
             $this->_GeniSys = $_GeniSys;
         }
 
-        public function updateNLUdeviceID()
+        public function updateTASSlocalID()
         {   
             if(!filter_input(
                 INPUT_POST,
@@ -25,10 +25,10 @@
 
             $pdoQuery = $this->_GeniSys->_secCon->prepare("
                 UPDATE a7fh46_settings
-                SET nluID = :nluID 
+                SET tassID = :tassID 
             ");
             $pdoQuery->execute([
-                ':nluID' => filter_input(
+                ':tassID' => filter_input(
                                 INPUT_POST,
                                 'deviceID',
                                 FILTER_SANITIZE_NUMBER_INT)
@@ -38,12 +38,12 @@
 
             return [
                 "Response"=>"OK",
-                "Redirect"=>"/NLU/"
+                "Redirect"=>"/TASS/"
             ];
             
         }
 
-        public function updateNLUdevice()
+        public function updateTASSlocal()
         {   
             if(!filter_input(
                 INPUT_POST,
@@ -59,29 +59,29 @@
 
             if(!filter_input(
                 INPUT_POST,
-                'nluAddress',
+                'tassAddress',
                 FILTER_SANITIZE_STRING)):
 
                 return [
                     "Response"=>"FAILED",
-                    "ResponseMessage"=>"NLU API address is required"
+                    "ResponseMessage"=>"TASS Stream address is required"
                 ];
 
             endif;
 
             $pdoQuery = $this->_GeniSys->_secCon->prepare("
                 UPDATE a7fh46_settings
-                SET nluID = :nluID,
-                    nluAddress = :nluAddress 
+                SET tassID = :tassID,
+                    tassAddress = :tassAddress 
             ");
             $pdoQuery->execute([
-                ':nluID' => filter_input(
+                ':tassID' => filter_input(
                                 INPUT_POST,
                                 'deviceID',
                                 FILTER_SANITIZE_NUMBER_INT),
-                ':nluAddress' => filter_input(
+                ':tassAddress' => filter_input(
                     INPUT_POST,
-                    'nluAddress',
+                    'tassAddress',
                     FILTER_SANITIZE_STRING)
             ]);
             $pdoQuery->closeCursor();
@@ -97,7 +97,7 @@
 
                     return [
                         "Response"=>"OK",
-                        "Redirect"=>"/NLU/"
+                        "Redirect"=>"/TASS/"
                     ];
             else:
 
@@ -193,58 +193,20 @@
             curl_close($curl);
             return $result;
         }
-        
-        public function talkToNLU()
-        {  
-            if(!filter_input(
-                INPUT_POST,
-                'humanInput',
-                FILTER_SANITIZE_STRING)):
-
-                return [
-                    "Response"=>"FAILED",
-                    "ResponseMessage"=>"Human input is required"
-                ];
-
-            endif;
-            $response = [];
-            $response = $this->apiCall(
-                "POST", 
-                "infer/1", 
-                [
-                    "query" => filter_input(INPUT_POST, 'humanInput', FILTER_SANITIZE_STRING)
-                ],
-                "application/json");
-            return $response;
-        }
     }
 
-$_NLU = new NLU($_GeniSys); 
+$_TASS = new TASS($_GeniSys); 
 
 if(filter_input(
     INPUT_POST,
     'ftype',
-    FILTER_SANITIZE_STRING)=="updateNLUdeviceID"):
-        die(json_encode($_NLU->updateNLUdeviceID()));
+    FILTER_SANITIZE_STRING)=="updateTASSlocalID"):
+        die(json_encode($_TASS->updateTASSlocalID()));
 endif;
 
 if(filter_input(
     INPUT_POST,
     'ftype',
-    FILTER_SANITIZE_STRING)=="updateNLUdevice"):
-        die(json_encode($_NLU->updateNLUdevice()));
-endif;
-
-if(filter_input(
-    INPUT_POST,
-    'ftype',
-    FILTER_SANITIZE_STRING)=="nluInteract"):
-        die($_NLU->talkToNLU());
-endif;
-
-if(filter_input(
-    INPUT_POST,
-    'ftype',
-    FILTER_SANITIZE_STRING)=="genisysInference"):
-        die($_NLU->talkToNLU());
+    FILTER_SANITIZE_STRING)=="updateTASSlocal"):
+        die(json_encode($_TASS->updateTASSlocal()));
 endif;

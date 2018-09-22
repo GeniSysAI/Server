@@ -8,34 +8,19 @@
         }
 				
 		public function decrypt($value)
-		{
-			list($iv, $value) = explode(
-				'@@', 
-				base64_decode($value));
-
-			return mcrypt_decrypt(
-				MCRYPT_RIJNDAEL_256, 
-				$this->_GeniSys->_auth, 
-				$value, 
-				MCRYPT_MODE_CFB, 
-				$iv);
+		{      
+			return openssl_decrypt(
+								$value,
+								"AES-128-ECB",
+								$this->_GeniSys->_auth); 
 		} 
 		
 		public function encrypt($value)
-		{          
-			$iv = mcrypt_create_iv(
-				mcrypt_get_iv_size(
-					MCRYPT_RIJNDAEL_256, 
-					MCRYPT_MODE_CFB), 
-					MCRYPT_RAND);
-
-			return base64_encode(
-				$iv . '@@' .  mcrypt_encrypt(
-					MCRYPT_RIJNDAEL_256,
-					$this->_GeniSys->_auth, 
-					$value,
-					MCRYPT_MODE_CFB, 
-					$iv));  
+		{        
+			return openssl_encrypt(
+								$value,
+								"AES-128-ECB",
+								$this->_GeniSys->_auth);  
 		}   
 		
 		public function decryptString($string)

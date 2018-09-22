@@ -204,17 +204,28 @@ var validation = {
                     console.log("")
                     console.log(ajaxResponse) 
                     console.log("")
-                    var ajaxResponse = jQuery.parseJSON(ajaxResponse);  
+                    var ajaxResponse = jQuery.parseJSON(ajaxResponse); 
                     console.log("")
                     switch (ajaxResponse.Response) 
                     {
                         case 'OK':
-
+                        
                             switch (toAppend)
                             {
                                 case true:
 
-                                    $("#"+appendItID).prepend("GeniSys: " + ajaxResponse.ResponseData[0].Response+"<br />")
+                                    if(ajaxResponse.ResponseData instanceof Array)
+                                    {
+                                        presponse = ajaxResponse.ResponseData[0].Response 
+                                    }
+                                    else
+                                    {
+                                        presponse = ajaxResponse.ResponseData.Response
+                                    }
+
+                                    VoiceSynthesis.Speak(presponse);
+
+                                    $("#"+appendItID).prepend("GeniSys: " + presponse +"<br />") 
                                     $("#humanInput").val("")
 
                                     if(ajaxResponse.Redirect)
@@ -242,11 +253,34 @@ var validation = {
 
                         default: 
 
-                            setTimeout(function()
-                            {	
-                                VoiceSynthesis.Speak(ajaxResponse.ResponseMessage)	
-                            },1000); 
+                            switch (toAppend)
+                            {
+                                case true:
 
+                                    if(ajaxResponse.ResponseData instanceof Array)
+                                    {
+                                        presponse = ajaxResponse.ResponseData[0].Response
+                                    }
+                                    else
+                                    {
+                                        presponse = ajaxResponse.ResponseData.Response
+                                    }
+
+                                    VoiceSynthesis.Speak(presponse);
+
+                                    $("#"+appendItID).prepend("GeniSys: " + presponse +"<br />") 
+                                    $("#humanInput").val("")
+
+                                    if(ajaxResponse.Redirect)
+                                    {
+                                        location.reload(ajaxResponse.Redirect)
+                                    }
+                                    break;
+
+                                default: 
+                                    break;
+                            }
+                            
                             Logging.logMessage(
                                 "Core",
                                 "Forms",
@@ -314,6 +348,8 @@ $('.container').on(
     '#formSubmit',  
     function (e){
         e.preventDefault();
+
+        console.log("here")
         
         var toAppend   = false;
         var appendIt   = $(this).closest("form").attr('append');

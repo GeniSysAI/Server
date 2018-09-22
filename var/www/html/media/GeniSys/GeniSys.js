@@ -76,18 +76,6 @@ var GeniSys =
 }
 
 GeniSys.startTime();
-GeniSys.AsyncLoad(
-    '/media/GeniSys/VoiceSynthesis.js',
-    'VoiceSynthesis', 
-    function(){
-        VoiceSynthesis = VoiceSynthesis
-        sessionStorage.VoiceSynthesisLoaded=true
-        Logging.logMessage(
-            "Core",
-            "VoiceSynthesis",
-            "VoiceSynthesis Script Loaded"
-        );
-    });
     
 GeniSys.AsyncLoad(
     '/media/GeniSys/validation.js',
