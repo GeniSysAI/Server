@@ -348,9 +348,9 @@ The latest push to 0.0.1 allows you to connect your TASS Local camera to the UI 
 
 You can also watch the live stream of your TASS Local camera:
 
-[![Managing Your TASS Local Camera](images/TASS-Local-View.jpg)](https://github.com/GeniSysAI/Server/tree/0.0.1/var/www/html/TASS)
-
 [![Managing Your TASS Local Camera](images/TASS-Local-View-Main.jpg)](https://github.com/GeniSysAI/Server/tree/0.0.1/var/www/html/TASS)
+
+[![Managing Your TASS Local Camera](images/TASS-Local-View.jpg)](https://github.com/GeniSysAI/Server/tree/0.0.1/var/www/html/TASS)
 
 # Voice Recognition
 
