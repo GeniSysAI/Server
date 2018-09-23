@@ -81,41 +81,38 @@ Security is everything, and it is even better when security is free ;) To encryp
 
 If you have followed above correctly you should now be able to access your website, but only using the secure protocol, 443, ie: https. If you visit your site you should now see the default Nginx page.
 
-# Install IPTables
+# UFW Firewall
 
-Now you should install IPTables, to do this execute the following code:
-
-```
- $ sudo apt-get install iptables-persistent
- $ sudo apt-get install netfilter-persistent
-```
-
-Once installed,  you can check the current configuration with the following command:
+Now you will set up your firewall:
 
 ```
- $ sudo iptables -L
+ $ sudo ufw enable
+ $ sudo ufw disable
 ```
-
-Open the configuration file, use the **/etc/iptables/rules.v4** example in the project repo to replace the configuration after copying the default config.
-
-```
- $ sudo cp /etc/iptables/rules.v4 sudo cp /etc/iptables/rules.v4.copy
- $ sudo nano /etc/iptables/rules.v4
-```
-
-You should notice the rules that allow traffic to the server, the ports that are accepted can be found in the **Acceptable TCP traffic** block:
+Now add the ports that we will require to be open: (In future updates these rules will be tightened)
 
 ```
--A TCP -p tcp --dport 22  -j ACCEPT
--A TCP -p tcp --dport 80  -j ACCEPT
--A TCP -p tcp --dport 443 -j ACCEPT
+ $ sudo ufw allow 22
+ $ sudo ufw allow 443
+ $ sudo ufw allow 3306
 ```
 
-Then save and reload:
+Finally start and check the status
 
 ```
- $ sudo service netfilter-persistent save
- $ sudo service netfilter-persistent reload
+ $ sudo ufw enable
+ $ sudo ufw status
+```
+
+Output:
+
+```
+To                         Action      From
+--                         ------      ----
+Nginx Full                 ALLOW       Anywhere
+3306                       ALLOW       Anywhere
+Nginx Full (v6)            ALLOW       Anywhere (v6)
+3306 (v6)                  ALLOW       Anywhere (v6)
 ```
 
 # Install MySql
@@ -136,13 +133,14 @@ Now create a user and password that we will use for phpMyAdmin, first login in w
 Now we can create a user with the required permissions to manage phpMyAdmin, make sure you remember the credentials you create with the below command.
 
 ```
- mysql> GRANT SELECT, INSERT, DELETE, CREATE  ON *.* TO 'YourNewUsername'@'localhost' IDENTIFIED BY 'YourNewPassword';
+ mysql> GRANT SELECT, INSERT, DELETE, CREATE, ALTER, RELOAD, DROP  ON *.* TO 'YourNewUsername'@'localhost' IDENTIFIED BY 'YourNewPassword';
 ```
 
-Also create a user for your application database.
+Also create a user for your application database, this will create a user that is able to use remote access on your local network.
 
 ```
- mysql> GRANT SELECT, INSERT, DELETE, CREATE  ON *.* TO 'YourNewUsername'@'localhost' IDENTIFIED BY 'YourNewPassword';
+ mysql> GRANT SELECT, INSERT, DELETE  ON *.* TO 'YourNewUsername'@'localhost' IDENTIFIED BY 'YourNewPassword';
+ mysql> GRANT SELECT, INSERT, DELETE  ON *.* TO 'YourNewUsername'@'%' IDENTIFIED BY 'YourNewPassword';
 ```
 
 Finally, create the required database:

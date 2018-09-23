@@ -1,21 +1,22 @@
 var VoiceRecognition = 
 { 
 	'bootUp' : function ()
-	{					
+	{
+		sessionStorage.speakingState = "false"					
 		annyang.addCallback('result', function(userSaid) 
 		{
 			console.log(userSaid)
 		});
 							
 		annyang.addCallback('resultNoMatch', function(userSaid) 
-		{ 
-			if(sessionStorage.speakingState==false)
+		{ 	console.log(sessionStorage.speakingState)
+			if(sessionStorage.speakingState=="false")
 			{
 				$("#GeniSysChat").prepend("Human: " + userSaid[0] +"<br />") 
 				$.post( window.location.href , 'ftype=genisysInference&humanInput='+userSaid[0]+'&isVoice=1', function( Response )
 				{ 
 					var Response = jQuery.parseJSON( Response ); 
-					var presponse    = Response.ResponseData[0].Response
+					var presponse = Response.ResponseData[0].Response
 	
 					VoiceSynthesis.Speak(presponse);
 	
