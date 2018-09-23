@@ -16,6 +16,7 @@ error_reporting(E_ALL);
                     true));
                     
             $this->config     = $config; 
+            $this->host       = $config->host; 
             $this->dbname     = $config->dbname; 
             $this->dbusername = $config->dbusername; 
             $this->dbpassword = $config->dbpassword;
@@ -27,7 +28,7 @@ error_reporting(E_ALL);
             try
             {
                 $this->dbcon = new PDO(
-                    'mysql:host=localhost'.';dbname='.$this->dbname,
+                    'mysql:host='.$this->host.';dbname='.$this->dbname,
                     $this->dbusername,
                     $this->dbpassword, 
                     [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"]

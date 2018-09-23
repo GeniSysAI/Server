@@ -13,6 +13,17 @@ SET time_zone = "+00:00";
 --
 -- Database: `a7fh45_a7fh45`
 --
+--
+-- Table structure for table `a7fh46_users`
+--
+
+CREATE TABLE `a7fh46_users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `floor` int(11) NOT NULL,
+  `zone` int(11) NOT NULL,
+  `lastSeen` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -94,6 +105,43 @@ CREATE TABLE `tass_foscam_devices` (
   `URL` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `a7fh46_users`
+--
+
+CREATE TABLE `a7fh46_users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `floor` int(11) NOT NULL,
+  `zone` int(11) NOT NULL,
+  `lastSeen` datetime NOT NULL DEFAULT '1970-01-02 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `a7fh46_users`
+--
+
+INSERT INTO `a7fh46_users` (`id`, `name`, `floor`, `zone`, `lastSeen`) VALUES
+(1, 'Adam', 0, 98, '2018-09-23 17:07:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `a7fh46_users_logs`
+--
+
+CREATE TABLE `a7fh46_users_logs` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `lid` int(11) NOT NULL,
+  `fid` int(11) NOT NULL,
+  `zid` int(11) NOT NULL,
+  `did` int(11) NOT NULL,
+  `timeSeen` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
@@ -132,6 +180,19 @@ ALTER TABLE `tass_foscam_devices`
   ADD KEY `jid` (`jid`);
 
 --
+-- Indexes for table `a7fh46_users`
+--
+ALTER TABLE `a7fh46_users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `a7fh46_users_logs`
+--
+ALTER TABLE `a7fh46_users_logs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uid` (`uid`,`lid`,`fid`,`zid`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -139,19 +200,28 @@ ALTER TABLE `tass_foscam_devices`
 -- AUTO_INCREMENT for table `a7fh46_logins`
 --
 ALTER TABLE `a7fh46_logins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `a7fh46_loginsF`
 --
 ALTER TABLE `a7fh46_loginsF`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `a7fh46_settings`
 --
 ALTER TABLE `a7fh46_settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `tass_foscam_devices`
 --
 ALTER TABLE `tass_foscam_devices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+--
+ALTER TABLE `a7fh46_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+--
+-- AUTO_INCREMENT for table `a7fh46_users_logs`
+--
+ALTER TABLE `a7fh46_users_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;

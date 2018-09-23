@@ -11,20 +11,33 @@ var VoiceSynthesis =
 	'synthesis'    : window.speechSynthesis,
 	'Speak' : function (text)
 	{
-		sessionStorage.speakingState=true
+		text = text.replace(
+			new RegExp(
+				'GeniSys', 
+				'g'), 
+			'');
+
 		VoiceRecognition.pause()
+
 		var VSynth = new SpeechSynthesisUtterance(text);
 		var voices = this.synthesis.getVoices()
 
 		VSynth.voice = voices[3];
 		VSynth.pitch = 1;
 		VSynth.rate = 1;
+
+		sessionStorage.speakingState="true"
 		this.synthesis.speak(VSynth);
 
 		VSynth.onend = function(event) 
 		{
-			VoiceRecognition.resume()
-			sessionStorage.speakingState=false
+			setTimeout(function()
+			{ 
+				console.log("End")
+				VoiceRecognition.resume()
+				sessionStorage.speakingState="false"
+		
+			}, 1500);
 		}
 	}, 
 	'StopSpeaking' :  function()

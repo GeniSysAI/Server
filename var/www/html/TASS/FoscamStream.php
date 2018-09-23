@@ -108,6 +108,32 @@ $_users->checkSession();
                         
                     </div>
                     <div class="col-lg-4">
+                        
+                        <div class="panel panel-default">
+                
+                            <div class="panel-heading">
+                
+                                <i class="fa fa-exclamation fa-fw"></i> TASS Foscam Stream Controls
+                
+                            </div>
+                            
+                            <div class="panel-body">
+
+                                <div class="list-group">
+                                    <a href="" class="list-group-item" id="flip">
+                                        <i class="fa fa-rotate-right fa-1x"></i> Flip Camera Stream #<?=abs($tassFoscam["ResponseData"]["id"]); ?>
+                                    </a>
+                                </div>
+
+                                <div class="list-group">
+                                    <a href="" class="list-group-item" id="flip">
+                                        <i class="fa fa-rotate-right fa-1x"></i> Flip Camera Stream #<?=abs($tassFoscam["ResponseData"]["id"]); ?>
+                                    </a>
+                                </div>
+
+                            </div>
+
+                        </div>
         
                         <?php  include dirname(__FILE__) . '/../TASS/includes/TASSfoscamC.php'; ?>
 

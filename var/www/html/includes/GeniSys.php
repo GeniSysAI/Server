@@ -23,7 +23,7 @@
                     
                     <div class="list-group">
                         <a class="list-group-item">
-                            TASS <span class="pull-right text-muted small"><em><?=$_GeniSys->_confs['tassID'] ? "Setup Complete" : "Setup Required"; ?></em></span>
+                            TASS Local <span class="pull-right text-muted small"><em><?=$_GeniSys->_confs['tassID'] ? "Setup Complete" : "Setup Required"; ?></em></span>
                         </a>
                     </div>
     

@@ -81,7 +81,7 @@ $_users->checkSession();
 
                             <div class="panel-heading">
 
-                                <i class="fa fa-cogs fa-fw"></i> NLU Interaction
+                                <i class="fa fa-commenting-o fa-fw"></i> NLU Interaction
 
                                 <div class="pull-right">
 
