@@ -94,7 +94,6 @@ Now add the ports that we will require to be open: (In future updates these rule
 ```
  $ sudo ufw allow 22
  $ sudo ufw allow 443
- $ sudo ufw allow 3306
 ```
 
 Finally start and check the status
@@ -102,17 +101,6 @@ Finally start and check the status
 ```
  $ sudo ufw enable
  $ sudo ufw status
-```
-
-Output:
-
-```
-To                         Action      From
---                         ------      ----
-Nginx Full                 ALLOW       Anywhere
-3306                       ALLOW       Anywhere
-Nginx Full (v6)            ALLOW       Anywhere (v6)
-3306 (v6)                  ALLOW       Anywhere (v6)
 ```
 
 # Install MySql
