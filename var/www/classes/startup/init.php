@@ -60,6 +60,7 @@ error_reporting(E_ALL);
             $this->_secCon      = $_secCon->dbcon;
             $this->_app         = $_secCon->config->JumpWayAppID;
             $this->_user        = $_secCon->config->JumpWayAppPublic;
+            $this->_pSk         = $_secCon->config->JumpWayAppSecret;
             $this->_location    = $_secCon->config->JumpWayLocation;
             $this->_zone        = $_secCon->config->JumpWayZone;
             $this->_device      = $_secCon->config->JumpWayDevice;

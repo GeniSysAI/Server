@@ -90,9 +90,11 @@ class API
 		
     private function getAuthHeaders()
     { 
-        $authString=substr(base64_decode($_SERVER["HTTP_AUTHORIZATION"]), 6);
-        $authParts=explode(":", $authString);
-        
+        $authParts=[
+            $_SERVER["PHP_AUTH_USER"],
+            $_SERVER["PHP_AUTH_PW"]
+        ];
+        $this->writeFile("auth.txt",$authParts);
         return $authParts;
     }
 
@@ -115,44 +117,51 @@ class API
         return json_encode($data);
         
     }
+
+    public function createHMAC($params=[], $key)
+    {
+        $parameters = null;
+        foreach($params AS $paramsKey => $paramsValue):
+            $parameters = $parameters . $paramsValue . ".";
+        endforeach;
+        return hash_hmac("sha256",
+            rtrim(
+                $parameters, 
+                "."),
+                $key);
+    }
         
     public function processAPIcall() 
     {
+        $authHeaders=$this->getAuthHeaders();
+			
+        if (!$authHeaders[0] || !$authHeaders[1]):
+            return $this->returnResponse(["Response"=>"Failed", "ResponseMessage"=>"No Authorisation Provided"], 401);
+        endif;
+
+        $secretHash  = $this->createHMAC([$this->_GeniSys->_pSk],$this->_GeniSys->_pSk);
+
+        if(!hash_equals($authHeaders[1], $secretHash)):
+            return $this->returnResponse(["Response"=>"Failed", "ResponseMessage"=>"Not Authorised"], 401);
+        endif;
 
         if($this->_requestMethod==null):
-            return $this->returnResponse([
-                                            "Response"=>"Failed",
-                                            "ResponseMessage"=>"No valid method"
-                                        ], 
-                                        401);
+            return $this->returnResponse(["Response"=>"Failed", "ResponseMessage"=>"No valid method"], 401);
         endif;
 
         if($this->_requestData==null):
-            return $this->returnResponse([
-                                            "Response"=>"Failed",
-                                            "ResponseMessage"=>"No valid data"
-                                        ], 
-                                        401);
-                                        
+            return $this->returnResponse(["Response"=>"Failed", "ResponseMessage"=>"No valid data"], 401);
         endif;
 
         if($this->_requestCall==null):
-            return $this->returnResponse([
-                                            "Response"=>"Failed",
-                                            "ResponseMessage"=>"No valid call"
-                                        ], 
-                                        404);
+            return $this->returnResponse(["Response"=>"Failed", "ResponseMessage"=>"No valid call"], 404);
         endif;
 			
         if ((int)method_exists($this, $this->_requestCall) > 0):
             return $this->returnResponse($this->{$this->_requestCall}($this->_requestData));
         endif;
 
-        return $this->returnResponse([
-                                        "Response"=>"Failed",
-                                        "ResponseMessage"=>"No valid call"
-                                    ], 
-                                    404);
+        return $this->returnResponse(["Response"=>"Failed", "ResponseMessage"=>"No valid call"], 404);
     }
         
     private function getHumanID($data) 

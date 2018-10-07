@@ -1,5 +1,6 @@
 {
-    "dbname" : "",
+    "host" : "localhost",
+    "dbname" : "a7fh45_a7fh45",
     "dbusername" : "",
     "dbpassword" : "",
     "JumpWayAppID" : 0,
@@ -9,6 +10,5 @@
     "JumpWayZone" : 0,
     "JumpWayDevice" : 0,
     "JumpWayMqttUser"  : "",
-    "JumpWayMqttPass"  : "",
-    "TassURL"  : ""  
+    "JumpWayMqttPass"  : ""
 }
