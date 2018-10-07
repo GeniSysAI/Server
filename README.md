@@ -133,14 +133,13 @@ Now create a user and password that we will use for phpMyAdmin, first login in w
 Now we can create a user with the required permissions to manage phpMyAdmin, make sure you remember the credentials you create with the below command.
 
 ```
- mysql> GRANT SELECT, INSERT, DELETE, CREATE, ALTER, RELOAD, DROP  ON *.* TO 'YourNewUsername'@'localhost' IDENTIFIED BY 'YourNewPassword';
+ mysql> GRANT ALL ON *.* TO 'YourNewUsername'@'localhost' IDENTIFIED BY 'YourNewPassword';
 ```
 
-Also create a user for your application database, this will create a user that is able to use remote access on your local network.
+Also create a user for your application database.
 
 ```
  mysql> GRANT SELECT, INSERT, DELETE  ON *.* TO 'YourNewUsername'@'localhost' IDENTIFIED BY 'YourNewPassword';
- mysql> GRANT SELECT, INSERT, DELETE  ON *.* TO 'YourNewUsername'@'%' IDENTIFIED BY 'YourNewPassword';
 ```
 
 Finally, create the required database:
@@ -356,22 +355,21 @@ You can also watch the live stream of your TASS Local camera:
 It is now possible to interact with GeniSys using your voice. This feature is powered by an open source project [annyang](https://github.com/TalAter/annyang "annyang") which is basically a wrapper for the voice recognition feature of the web speech API, according to  [caniuse](https://caniuse.com/#feat=speech-synthesis "caniuse") support seems to be finally much wider including: Edge, Firefox, Chrome, Safari, ios Safari, Chrome for Android and Samsung Internet, but I have not tested anything other than Chrome. In Chrome for Android an alert noise is made every time the voice recognition restarts, this is unavoidable and there has been a long time developer request for Google to remove this feature but Google are adimant that it will remain. 
 
 If you have updated your server code and booted up the server you should get asked for permissions to use the microphone, once you accept you will be able to speak to your NLU providing the NLU is online.
+- [PyImageSearch](https://www.pyimagesearch.com/ "PyImageSearch")
 
-# Contributing 
-Please read **CONTRIBUTING.md** for details on our code of conduct, and the process for submitting pull requests to us.
+# Contributing
+Please read [CONTRIBUTING.md](https://github.com/GeniSysAI/Vision/blob/master/CONTRIBUTING.md "CONTRIBUTING.md") for details on our code of conduct, and the process for submitting pull requests to me.
 
 # Versioning
-We use SemVer for versioning. For the versions available, see the tags on this repository.
+I use SemVer for versioning. For the versions available, see [GeniSysAI/Server/releases](https://github.com/GeniSysAI/Server/releases "GeniSysAI/Server/releases").
 
 # License
-This project is licensed under the **MIT License** - see the **LICENSE.md** file for details
+This project is licensed under the **MIT License** - see the [LICENSE](https://github.com/GeniSysAI/Server/blob/master/LICENSE "LICENSE") file for details.
 
 # Bugs/Issues
-
-We use issues to track bugs and general requests related to using this project.
+I use the [repo issues](https://github.com/GeniSysAI/Server/issues "repo issues") to track bugs and general requests related to using this project. 
 
 # Author
-
 [![Adam Milton-Barker: BigFinte IoT Network Engineer & Intel® Software Innovator](images/Adam-Milton-Barker.jpg)](https://github.com/AdamMiltonBarker)
 
 
