@@ -75,7 +75,7 @@ include dirname(__FILE__) . '/../classes/AIcore/NLU/core.php';
                                 <fieldset>
 
                                     <div class="form-group">
-                                        <input id="username" type="name" class="form-control username-validate" name="username" placeholder="App Public Key" value="" autofocus>
+                                        <input id="username" type="name" class="form-control username-validate" name="username" placeholder="App Public Key" value="" >
                                     </div>
                                     <div class="form-group">
                                         <input id="password" type="password" class="form-control password-validate" name="password" placeholder="App Private Key" value="" autocomplete="false">
