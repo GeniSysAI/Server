@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 body {
-  background-color: #f8f8f8; 
+  background-color: #051c32ff; 
   background-image: url(../images/site/home.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -16,14 +16,14 @@ body {
 #page-wrapper {
   padding: 0 15px;
   min-height: 568px;
-  background-color: white;
+  background-color: none;
 }
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
     margin: 0 0 0 250px;
     padding: 0 30px;
-    border-left: 1px solid #e7e7e7;
+    border-left: 1px solid #051c32ff;
   }
 }
 .navbar-top-links {
@@ -74,15 +74,33 @@ body {
 .sidebar .sidebar-nav.navbar-collapse {
   padding-left: 0;
   padding-right: 0;
+  color: #fff;
 }
 .sidebar .sidebar-search {
   padding: 15px;
 }
 .sidebar ul li {
-  border-bottom: 1px solid #e7e7e7;
+  color: #fff !important;
+  background-color: #041526ff;
+  border-bottom: 1px solid #115fa0ff;
+}
+.sidebar ul li a {
+  color: #fff;
+}
+.sidebar ul li a:focus {
+  color: #fff;
+  background-color: #115fa0ff;
+  
+}
+.sidebar ul li a:hover {
+  color: #fff;
+  background-color: #115fa0ff;
+  
 }
 .sidebar ul li a.active {
-  background-color: #eeeeee;
+  color: #fff;
+  background-color: #115fa0ff;
+  border-bottom: 1px solid #041526ff;
 }
 .sidebar .arrow {
   float: right;
@@ -98,6 +116,9 @@ body {
   border-bottom: none !important;
 }
 .sidebar .nav-second-level li a {
+  padding-left: 37px;
+}
+.sidebar .nav-second-level li a:hover {
   padding-left: 37px;
 }
 .sidebar .nav-third-level li a {

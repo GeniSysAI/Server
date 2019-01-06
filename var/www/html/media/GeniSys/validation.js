@@ -201,15 +201,12 @@ var validation = {
                 $("#"+id).closest("form").serialize(), 
                 function( ajaxResponse )
                 {  
-                    console.log("")
-                    console.log(ajaxResponse) 
-                    console.log("")
-                    var ajaxResponse = jQuery.parseJSON(ajaxResponse); 
-                    console.log("")
+                    console.log(ajaxResponse)  
+                    var ajaxResponse = jQuery.parseJSON(ajaxResponse);  
                     switch (ajaxResponse.Response) 
                     {
                         case 'OK':
-                        
+
                             switch (toAppend)
                             {
                                 case true:
@@ -230,15 +227,15 @@ var validation = {
 
                                     if(ajaxResponse.Redirect)
                                     {
-                                        location.reload(ajaxResponse.Redirect)
+                                        window.location.replace(location.protocol + '//' + location.hostname + ajaxResponse.Redirect)
                                     }
                                     break;
 
-                                default: 
+                                default:
 
                                     if(ajaxResponse.Redirect)
                                     {
-                                        location.reload(ajaxResponse.Redirect)
+                                        window.location.replace(location.protocol + '//' + location.hostname + ajaxResponse.Redirect)
                                     }
                                     break;
                             }
@@ -248,11 +245,10 @@ var validation = {
                                 "Forms",
                                 "Form Submission Successful"
                             );
-
                             break;
 
-                        default: 
-
+                        default:
+                        
                             switch (toAppend)
                             {
                                 case true:
@@ -273,7 +269,7 @@ var validation = {
 
                                     if(ajaxResponse.Redirect)
                                     {
-                                        location.reload(ajaxResponse.Redirect)
+                                        window.location.replace(location.protocol + '//' + location.hostname + ajaxResponse.Redirect)
                                     }
                                     break;
 
@@ -348,8 +344,6 @@ $('.container').on(
     '#formSubmit',  
     function (e){
         e.preventDefault();
-
-        console.log("here")
         
         var toAppend   = false;
         var appendIt   = $(this).closest("form").attr('append');
@@ -384,6 +378,14 @@ $('#wrapper').on(
         validation.submitValidation($(this).attr('id'), toAppend, appendIt, appendItID);
 });
 
+$('#wrapper').on(
+    'click', 
+    '#mediaFormSubmit',  
+    function (e){
+        e.preventDefault();
+        $(this).closest("form").submit();
+});
+
 $('#form').keypress(function (e) {
     if (e.which == 13) {
         
@@ -401,8 +403,3 @@ $('#form').keypress(function (e) {
         return false;
     }
 });
-
-$(function(){
-    $(".btn").on("click",function(){
-    });
-  });
