@@ -1,17 +1,19 @@
 <?php session_start();
 
 $pageDetails = [
-    "PageID" => "Dashboard"
+    "PageID" => "Server"
 ];
 
-include dirname(__FILE__) . '/../classes/Core/init.php';
-include dirname(__FILE__) . '/../classes/Server/core.php';
-include dirname(__FILE__) . '/../classes/Users/core.php';
+include dirname(__FILE__) . '/../../../classes/Core/init.php';
+include dirname(__FILE__) . '/../../../classes/Users/core.php';
 
-include dirname(__FILE__) . '/../classes/AIcore/NLU/core.php';
+include dirname(__FILE__) . '/../../../classes/AIcore/NLU/core.php';
+
+include dirname(__FILE__) . '/../../../classes/iotJumpWay/Devices.php';
 
 #print_r($_SESSION);
 #session_destroy();
+$_users->checkSession();
 
 ?>
 
@@ -54,44 +56,53 @@ include dirname(__FILE__) . '/../classes/AIcore/NLU/core.php';
     </head>
 
     <body>
+    
+        <div id="wrapper">
 
-        <div class="container">
+            <?php include dirname(__FILE__) . '/../../includes/nav.php'; ?>
 
-            <div class="row">
+            <div id="page-wrapper">
 
-                <div class="col-md-4 col-md-offset-4">
-
-                    <div class="login-panel panel panel-default">
-
-                        <div class="panel-heading">
-
-                            <h3 class="panel-title">Sign In To GeniSys</h3> <div id="clock"></div>
-
-                        </div>
-                        <div class="panel-body">
-
-                            <form role="form">
-
-                                <fieldset>
-
-                                    <div class="form-group">
-                                        <input id="username" type="name" class="form-control username-validate" name="username" placeholder="App Public Key" value="" >
-                                    </div>
-                                    <div class="form-group">
-                                        <input id="password" type="password" class="form-control password-validate" name="password" placeholder="App Private Key" value="" autocomplete="false">
-                                        <input id="login" type="hidden" class="" name="login" value="1">
-                                    </div>
-                                    <a id="formSubmit" class="btn btn-lg btn-success btn-block">Login</a>
-
-                                </fieldset>
-                            </form>
-                        </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">LIVE MQTT</h1>
                     </div>
                 </div>
-            </div>
-        </div>
+                
+                <div class="row"> 
 
-        <?php  include dirname(__FILE__) . '/includes/scripts.php'; ?>
+                    <div class="col-lg-12">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-cogs fa-fw"></i> Realtime Location MQTT Messages
+
+                                <div class="pull-right">
+                                    <div class="btn-group">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="panel-body">
+            
+                                <div id="status" class="scrollerSmaller"></div>
+
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        
+        </div>
+        
+        <?php  include dirname(__FILE__) . '/../../includes/scripts.php'; ?>
+	
+        <script src="<?=$_GeniSys->_helpers->decrypt($_GeniSys->_confs["domainString"]); ?>/Connectivity/Live/classes/mqttws31.js" type="text/javascript"></script>
+        <script src="<?=$_GeniSys->_helpers->decrypt($_GeniSys->_confs["domainString"]); ?>/Connectivity/Live/classes/iotJumpWay.js" type="text/javascript"></script>
  
     </body>
 

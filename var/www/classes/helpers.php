@@ -8,19 +8,34 @@
         }
 				
 		public function decrypt($value)
-		{      
-			return openssl_decrypt(
-								$value,
-								"AES-128-ECB",
-								$this->_GeniSys->_auth); 
+		{
+			list($iv, $value) = explode(
+				'@@', 
+				base64_decode($value));
+
+			return mcrypt_decrypt(
+				MCRYPT_RIJNDAEL_256, 
+				$this->_GeniSys->_key, 
+				$value, 
+				MCRYPT_MODE_CFB, 
+				$iv);
 		} 
 		
 		public function encrypt($value)
-		{        
-			return openssl_encrypt(
-								$value,
-								"AES-128-ECB",
-								$this->_GeniSys->_auth);  
+		{          
+			$iv = mcrypt_create_iv(
+				mcrypt_get_iv_size(
+					MCRYPT_RIJNDAEL_256, 
+					MCRYPT_MODE_CFB), 
+					MCRYPT_RAND);
+
+			return base64_encode(
+				$iv . '@@' .  mcrypt_encrypt(
+					MCRYPT_RIJNDAEL_256,
+					$this->_GeniSys->_key, 
+					$value,
+					MCRYPT_MODE_CFB, 
+					$iv));  
 		}   
 		
 		public function decryptString($string)
@@ -65,7 +80,7 @@
 				PASSWORD_DEFAULT);
 		}
 
-        public function createHMAC($params=[])
+        public function createHMAC($params=[], $secret)
         {
 			$parameters = null;
             foreach($params AS $paramsKey => $paramsValue):
@@ -75,6 +90,6 @@
 				rtrim(
 					$parameters, 
 					"."),
-				$this->_GeniSys->_auth);
+					$secret);
         } 
 	}

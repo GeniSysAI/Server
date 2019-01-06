@@ -7,3 +7,32 @@
     color: #ffffff !important;
     background-color: #FF0000 !important;
 }
+
+.hide{
+  display: none;
+}
+
+h1.page-header{
+  color: #fff !important
+}
+
+.coreButtons{
+  padding: 25px; 
+  text-align: center; 
+  float: left; 
+  color: white;
+  text-decoration: none;
+}
+
+.coreButtons:hover{
+  text-decoration: none;
+}
+
+::-webkit-scrollbar
+{
+    width:0px;
+}
+::-webkit-scrollbar-track-piece
+{
+    background-coor:transparent;
+}

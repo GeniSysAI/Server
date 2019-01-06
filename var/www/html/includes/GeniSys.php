@@ -1,12 +1,8 @@
 
             <div class="panel panel-default">
-                
                 <div class="panel-heading">
-    
-                    <i class="fa fa-exclamation fa-fw"></i> GeniSys Info
-    
+                    <i class="fa fa-exclamation fa-fw"></i> Information
                 </div>
-                
                 <div class="panel-body">
                     
                     <div class="list-group">
@@ -23,10 +19,9 @@
                     
                     <div class="list-group">
                         <a class="list-group-item">
-                            TASS Local <span class="pull-right text-muted small"><em><?=$_GeniSys->_confs['tassID'] ? "Setup Complete" : "Setup Required"; ?></em></span>
+                            TASS <span class="pull-right text-muted small"><em><?=$_GeniSys->_confs['tassID'] ? "Setup Complete" : "Setup Required"; ?></em></span>
                         </a>
                     </div>
     
                 </div>
-                
             </div>
