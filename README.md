@@ -226,6 +226,47 @@ Now you can add the repository code to your server, to do this follow the guide:
 - [/etc/nginx/sites-available/default](https://github.com/GeniSysAI/Server/blob/master/etc/nginx/sites-available/default  "/etc/nginx/sites-available/default") is an example of how your server NGINX configuration should look, located on your server in the same location as in the repo.
 - You can copy the entire contents of the [Server/Media/Images/var/www](https://github.com/GeniSysAI/Server/tree/Media/Images/var/www  "Server/Media/Images/var/www") directory to the /var/www directory on your server.
 
+# Update Configuration
+Now it is time to update our server configuration. Open the [/var/www/classes/AIcore/confs.json](https://github.com/GeniSysAI/Server/blob/var/www/classes/AIcore/confs.json  "/var/www/classes/AIcore/confs.json") file on your server and add your database credentials and a secure 32bit key for your encryption, your iotJumpWay application credentials, iotJumpWay location ID and Application MQTT credentials. You will use your iotJumpWay application credentials to authenticate yourself onto the UI.  
+
+```
+{
+    "dbname" : "",
+    "dbusername" : "",
+    "dbpassword" : "",
+    "key"  : ""
+}
+```
+
+## Manual Settings
+Before you can use your server UI you need to add some comfiguration to the database. Navigate to your PhpMyAdmin and login as your root user. You should already have the [example default configuration](https://github.com/GeniSysAI/Server/blob/master/etc/nginx/sites-available/default "example default configuration") installed, if not you can do this now, then head to the **a7fh46_settings** table. You need to encrypt some values and enter them into the database manually before you will be able to access the UI. You will find the encryption function in [var/www/classes/helpers.php](https://github.com/GeniSysAI/Server/blob/master/var/www/classes/helpers.php "var/www/classes/helpers.php"):
+
+```
+public function decrypt($value)
+{
+    list($iv, $value) = explode(
+        '@@', 
+        base64_decode($value));
+    return mcrypt_decrypt(
+        MCRYPT_RIJNDAEL_256, 
+        $this->_GeniSys->_key, 
+        $value, 
+        MCRYPT_MODE_CFB, 
+        $iv);
+} 
+```
+
+The fields you need to encrypt and add to the database are as follows:
+
+- domainString: The full URL for your domain, ie: https://www.google.com
+- jumpwayAppID: Your IoT JumpWay App ID
+- JumpWayAppPublic: Your iotJumpWay App Public Key
+- JumpWayAppSecret: Your iotJumpWay App Secret Key
+
+## Server Settings
+[![GeniSys AI Server](Media/Images/ServerSettings.jpg)](https://github.com/GeniSysAI/Server)
+First we need to visit the the Server Settings page, from the UI menu you can click on Server. Here you need to add the Server Name which is your choice of name to identify your server in the system, this will also be used as the meta title for your UI pages, then you need to update your Server URL, which is your fully qualified domain name (FQDN), and then finally the name that you used whilst setting up NGINX and PHP MyAdmin, now hit submit, if you do not see an error message, all is well.
+
 # Extensions
 The GeniSys Server is only the hub of the GeniSys network. Through the UI you can manage various aspects of your AI network including the local NLU Engine and TASS system, as well as other AI / IoT smart home devices. 
 
@@ -237,9 +278,6 @@ After following the [GeniSys TASS Engine](https://github.com/GeniSysAI/Vision "G
 
 ## Future Extensions
 Further extensions are planned / under development including a management system for the IDC Classifier ([Breast Cancer AI](https://www.facebook.com/BreastCancerAI "Breast Cancer AI")) & the AML Classifier ([Peter Moss Acute Myeloid Leukemia Research Project](https://www.facebook.com/AMLResearchProject/ "Peter Moss Acute Myeloid Leukemia Research Project")).
-
-# Update Configuration
-Now it is time to update our server configuration. Open the [/var/www/classes/startup/confs.json](https://github.com/GeniSysAI/Server/blob/var/www/classes/startup/confs.json  "/var/www/classes/startup/confs.json") file on your server and add your database credentials, your iotJumpWay application credentials, iotJumpWay location ID and Application MQTT credentials. You will use your iotJumpWay application credentials to authenticate yourself onto the UI.  
 
 # Voice Recognition
 It is now possible to interact with GeniSys using your voice. This feature is powered by an open source project [annyang](https://github.com/TalAter/annyang "annyang") which is basically a wrapper for the voice recognition feature of the web speech API, according to  [caniuse](https://caniuse.com/#feat=speech-synthesis "caniuse") support seems to be finally much wider including: Edge, Firefox, Chrome, Safari, ios Safari, Chrome for Android and Samsung Internet, but I have not tested anything other than Chrome. In Chrome for Android an alert noise is made every time the voice recognition restarts, this is unavoidable and there has been a long time developer request for Google to remove this feature but Google are adimant that it will remain. 
@@ -255,7 +293,7 @@ I use SemVer for versioning. For the versions available, see [GeniSysAI/Server/r
 # License
 This project is licensed under the **MIT License** - see the [LICENSE](https://github.com/GeniSysAI/Server/blob/master/LICENSE "LICENSE") file for details.
 
-# Bugs/Issues
+# Bugs/Issues/Help
 I use the [repo issues](https://github.com/GeniSysAI/Server/issues "repo issues") to track bugs and general requests related to using this project. 
 
 # About The Author
