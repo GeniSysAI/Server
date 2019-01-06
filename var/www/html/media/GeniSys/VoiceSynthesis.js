@@ -11,18 +11,14 @@ var VoiceSynthesis =
 	'synthesis'    : window.speechSynthesis,
 	'Speak' : function (text)
 	{
-		text = text.replace(
-			new RegExp(
-				'GeniSys', 
-				'g'), 
-			'');
+		text = text.replace(new RegExp('GeniSys', 'g'), '');
 
 		VoiceRecognition.pause()
 
 		var VSynth = new SpeechSynthesisUtterance(text);
 		var voices = this.synthesis.getVoices()
 
-		VSynth.voice = voices[3];
+		VSynth.voice = voices[0];
 		VSynth.pitch = 1;
 		VSynth.rate = 1;
 

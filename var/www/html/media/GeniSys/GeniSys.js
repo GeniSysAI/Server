@@ -8,10 +8,10 @@
 
 var GeniSys = 
 {
-    'AsyncLoad' : function (url, scriptId, callback) 
+    "AsyncLoad" : function (url, scriptId, callback) 
     {        
         var script      = document.createElement("script"),
-            firstscript = document.getElementsByTagName('script')[0];
+            firstscript = document.getElementsByTagName("script")[0];
     
         script.async = true; 
         script.src = url; 
@@ -35,58 +35,25 @@ var GeniSys =
             script, 
             firstscript);
     },
-    'startTime' : function() 
-    {
-        var today  = new Date();
-        var locale = "en-us";
-        var month  = today.toLocaleString(locale, {month: "long"});
-        var y      = today.getFullYear();
-        var d      = today.getDay()
-        var h      = today.getHours();
-        var h      = today.getHours();
-        var m      = today.getMinutes();
-        var s      = today.getSeconds();
-
-        document.getElementById('clock').innerHTML = GeniSys.ordinalSuffix(d) + " " + month + " " + y + " " + h + ":" + GeniSys.checkTime(m) + ":" + GeniSys.checkTime(s);
-        var t = setTimeout(
-            GeniSys.startTime, 
-            500);
-    },
-    'checkTime' : function(i)
-    {
-        if (i < 10) {i = "0" + i};
-        return i;
-    },
-    'ordinalSuffix' : function(i) 
-    {
-        var j = i % 10,
-            k = i % 100;
-        if (j == 1 && k != 11) {
-            return i + "st";
-        }
-        if (j == 2 && k != 12) {
-            return i + "nd";
-        }
-        if (j == 3 && k != 13) {
-            return i + "rd";
-        }
-        return i + "th";
-        
+    "CheckServer" : function () 
+    { 
+        $.post(window.location.href, "getServerStats=true", function( Response )
+        {  
+            var Response = jQuery.parseJSON(Response); 
+            if($("#cpu").length != 0) {
+                $("#cpu").text(Response.CPU);
+            } 
+            if($("#memory").length != 0) {
+                $("#memory").text(Response.Memory);
+            }
+        });
     }
 }
-
-GeniSys.startTime();
     
-GeniSys.AsyncLoad(
-    '/media/GeniSys/validation.js',
-    'Validation', 
-    function(){
-        Validation = validation
-        sessionStorage.ValidationLoaded=true
-        Logging.logMessage(
-            "Core",
-            "Validation",
-            "Validation Script Loaded"
-        );
-    });
-            
+$( document ).ready(function() {
+    
+    setInterval(function()
+    { 
+        GeniSys.CheckServer();
+    }, 5000);
+});

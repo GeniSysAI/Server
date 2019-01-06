@@ -1,11 +1,10 @@
 <?php session_start();
 
 $pageDetails = [
-    "PageID" => "Server"
+    "PageID" => "Users"
 ];
 
 include dirname(__FILE__) . '/../../classes/Core/init.php';
-include dirname(__FILE__) . '/../../classes/Server/core.php';
 include dirname(__FILE__) . '/../../classes/Users/core.php';
 
 include dirname(__FILE__) . '/../../classes/iotJumpWay/Devices.php';
@@ -13,7 +12,6 @@ include dirname(__FILE__) . '/../../classes/iotJumpWay/Devices.php';
 #print_r($_SESSION);
 #session_destroy();
 $_users->checkSession();
-
 ?>
 
 <!DOCTYPE html>
@@ -64,103 +62,92 @@ $_users->checkSession();
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">SERVER SETTINGS</h1>
+                        <h1 class="page-header">USERS</h1>
                     </div>
                 </div>
                 
                 <div class="row"> 
 
-                    <div class="col-lg-12"><?php include dirname(__FILE__) . '/../Server/includes/top.php'; ?></div>
-
                     <div class="col-lg-8">
 
-                        <form role="form" id="form">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-users fa-fw"></i> Add Location User
 
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <i class="fa fa-cogs fa-fw"></i> Manage Server Settings
-
-                                    <div class="pull-right">
-                                        <div class="btn-group">
-                                        </div>
+                                <div class="pull-right">
+                                    <div class="btn-group">
                                     </div>
                                 </div>
-                                
-                                <div class="panel-body">
-
-                                    <div class="form-group">
-
-                                        <label>Server URL</label>
-                                        <input type="text" id="domainString" name="domainString" class="form-control text-validate" value="<?=$_GeniSys->_helpers->decrypt($_GeniSys->_confs['domainString']); ?>">
-                                        <p class="help-block">URL of server.</p>
-
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Server Name</label>
-                                        <input type="text" id="meta_title" name="meta_title" class="form-control text-validate" value="<?=$_GeniSys->_helpers->decrypt($_GeniSys->_confs['meta_title']); ?>">
-                                        <p class="help-block">Name of server, also used as meta title.</p>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Server Description</label>
-                                        <textarea id="meta_description" name="meta_description" class="form-control text-validate"><?=$_GeniSys->_helpers->decrypt($_GeniSys->_confs['meta_description']); ?></textarea>
-                                        <p class="help-block">Description of server, also used as meta description.</p>
-                                    </div>
-
-                                </div>
-                                
                             </div>
+                            
+                            <div class="panel-body">
 
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <i class="fa fa-cogs fa-fw"></i> Manage Server Database Settings
-
-                                    <div class="pull-right">
-                                        <div class="btn-group">
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="panel-body">
+                                <form role="form" id="form" enctype="multipart/form-data" action="AddTarget.php" target="TargetFrame" method="POST">
 
                                     <div class="form-group">
 
-                                        <label>phpMyAdmin Endpoint</label>
-                                        <input type="text" id="phpmyadmin" name="phpmyadmin" class="form-control text-validate" value="<?=$_GeniSys->_helpers->decrypt($_GeniSys->_confs['phpmyadmin']); ?>">
-                                        <p class="help-block">Endpoint of phpMyAdmin.</p>
+                                        <label>Name</label>
+                                        <input type="text" id ="name" name="name" class="form-control text-validate" value="">
+                                        <p class="help-block">Name of user.</p>
 
                                     </div>
+                                    <div class="form-group">
 
-                                    <input type="hidden" id="ftype" name="ftype" value="updateServer" /> 
-                                    <a class="btn btn-default" id="formSubmit">Submit</a>
+                                        <label>Email</label>
+                                        <input type="text" id ="email" name="email" class="form-control text-validate" value="">
+                                        <p class="help-block">Email of user.</p>
 
-                                </div>
-                                
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label>Email</label>
+                                        <input type="text" id ="telephone" name="telephone" class="form-control text-validate" value="">
+                                        <p class="help-block">Telephone of user.</p>
+
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label>Role</label>
+                                        <select id="role" name="role" class="form-control text-validate">
+                                            <option value="">Choose Role...</option>
+                                            <option value="Admin">Admin</option>
+                                            <option value="User">User</option>
+                                            <option value="Guest">Guest</option>
+                                        </select>
+                                        <p class="help-block">Role of user.</p>
+
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label>Profile Picture/Facial ID</label>
+                                        <input type="file"  id="profile" name="profile" class="" />
+                                        <p class="help-block">Profile picture for the user, this will also be used to create the known image for the TASS security related features of GeniSys, in future versions the classifiers will pull the encodings from the database on start instead of having a copy of the images on every device that may need them.</p>
+
+                                    </div>
+                                    <a class="btn btn-default" id="mediaFormSubmit">Submit</a>
+
+                                </form>
+                                <iframe id="TargetFrame" name="TargetFrame"></iframe>
+
                             </div>
-
-                        </form>
+                            
+                        </div>
                         
                     </div>
                     <div class="col-lg-4">
 
-                        <?php  include dirname(__FILE__) . '/../Server/includes/serverInfo.php'; ?>
-
                         <?php  include dirname(__FILE__) . '/../Connectivity/includes/Live.php'; ?>
 
                     </div>
-                        
-                </div>
 
+                </div>
             </div>
-        
         </div>
-        
+
         <?php  include dirname(__FILE__) . '/../includes/scripts.php'; ?>
 
         <script src="<?=$_GeniSys->_helpers->decrypt($_GeniSys->_confs["domainString"]); ?>/Connectivity/Live/classes/mqttws31.js" type="text/javascript"></script>
         <script src="<?=$_GeniSys->_helpers->decrypt($_GeniSys->_confs["domainString"]); ?>/Connectivity/Live/classes/iotJumpWay.js" type="text/javascript"></script>
- 
-    </body>
 
+    </body>
 </html> 

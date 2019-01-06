@@ -50,22 +50,15 @@
             $pdoQuery = $this->_GeniSys->_secCon->prepare("
                 UPDATE a7fh46_settings
                 SET meta_title = :meta_title,
+                    meta_description = :meta_description,
                     domainString = :domainString,
                     phpmyadmin = :phpmyadmin 
             ");
             $pdoQuery->execute([
-                ':meta_title' => filter_input(
-                                INPUT_POST,
-                                'meta_title',
-                                FILTER_SANITIZE_STRING),
-                                ':domainString' => filter_input(
-                                    INPUT_POST,
-                                    'domainString',
-                                    FILTER_SANITIZE_STRING),
-                                    ':phpmyadmin' => filter_input(
-                                        INPUT_POST,
-                                        'phpmyadmin',
-                                        FILTER_SANITIZE_STRING)
+                ':meta_title' => $this->_GeniSys->_helpers->encrypt(filter_input(INPUT_POST, 'meta_title', FILTER_SANITIZE_STRING)),
+                ':meta_description' => $this->_GeniSys->_helpers->encrypt(filter_input(INPUT_POST, 'meta_description', FILTER_SANITIZE_STRING)),
+                ':domainString' => $this->_GeniSys->_helpers->encrypt(filter_input(INPUT_POST, 'domainString', FILTER_SANITIZE_STRING)),
+                ':phpmyadmin' => $this->_GeniSys->_helpers->encrypt(filter_input(INPUT_POST, 'phpmyadmin', FILTER_SANITIZE_STRING))
             ]);
             $pdoQuery->closeCursor();
             $pdoQuery = null;

@@ -1,6 +1,6 @@
 <?php 
 
-    class iotJumpWayDevices
+    class iotJumpWayLocation
     {
         private $_GeniSys = null;
         
@@ -12,7 +12,7 @@
         private function apiCall($method, $endpoint, $data)
         {
             $curl = curl_init();
-            $url  = $this->_GeniSys->_helpers->decrypt($this->_GeniSys->_confs["jumpwayAPI"])."/API/REST/".$endpoint;
+            $url  = $this->_GeniSys->_confs["jumpwayAPI"]."/API/REST/".$endpoint;
             switch ($method):
 
                 case "POST":
@@ -25,15 +25,14 @@
                     break;
 
                 default:
-                    $url = sprintf("%s?%s", $this->_GeniSys->_helpers->decrypt($this->_GeniSys->_confs["jumpwayAPI"])."/API/REST/".$endpoint, http_build_query($data));
+                    $url = sprintf("%s?%s", $this->_GeniSys->_confs["jumpwayAPI"]."/API/REST/".$endpoint, http_build_query($data));
 
             endswitch;
 
-			$secret = $this->_GeniSys->_helpers->decrypt($this->_GeniSys->_confs["JumpWayAppSecret"]);
-			$secretHash = $this->_GeniSys->_helpers->createHMAC([$secret],$secret);
-            
             $headers = [
-                'Authorization: Basic '. base64_encode($this->_GeniSys->_helpers->decrypt($this->_GeniSys->_confs["jumpwayAppID"]).":".$secretHash)
+                'Authorization: Basic '. base64_encode(
+                    $this->_GeniSys->_app.":".$this->_GeniSys->_helpers->createHMAC(
+                        [$this->_GeniSys->_auth]))
             ];
 
             curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
@@ -45,18 +44,16 @@
             return $result;
         }
 
-        public function getDeviceList() 
+        public function getLocation($params=[]) 
         {
-            return json_decode($this->apiCall("POST","Devices/0_1_0/getDevices",[]));
+            return json_decode($this->apiCall("POST","Locations/0_1_0/getLocation",$params));
         }
 
-        public function getDevice($device) 
+        public function getLocationZones($params=[]) 
         {
-            return json_decode($this->apiCall("POST","Devices/0_1_0/getDevice",[
-                "Device" => $device
-            ]));
+            return json_decode($this->apiCall("POST","Locations/0_1_0/getLocationZones",$params));
         }
     }
 
 
-$_iotJumpWayDevices = new iotJumpWayDevices($_GeniSys);
+$_iotJumpWayLocation = new iotJumpWayLocation($_GeniSys);
