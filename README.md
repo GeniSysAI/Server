@@ -5,11 +5,9 @@
 [![UPCOMING RELEASE](https://img.shields.io/badge/UPCOMING%20RELEASE-0.0.3-blue.svg)](https://github.com/GeniSysAI/Server/tree/0.0.3)
 
 # About GeniSys AI
-
 GeniSys AI is an open source Artificial Intelligence Assistant Network using Computer Vision, Natural Linguistics and the Internet of Things. GeniSys uses a system based on [TASS A.I](https://github.com/TASS-AI/TASS-Facenet "TASS A.I") for [vision](https://github.com/GeniSysAI/Vision "vision"), an [NLU engine](https://github.com/GeniSysAI/NLU "NLU engine") for natural language understanding, in browser speech synthesis and speech recognition for speech and hearing, all homed on a dedicated Linux server in your home and managed via a secure UI.
 
 # About GeniSys AI Server
-
 [GeniSys AI Server](https://github.com/GeniSysAI/Server "GeniSys AI Server") is a customisable management system for [GeniSys AI](https://github.com/GeniSysAI/Server "GeniSys AI") networks. The GeniSys management system is built on top of [Ubuntu 18.04.1 LTS (Bionic Beaver)](http://releases.ubuntu.com/18.04/ "Ubuntu 18.04.1 LTS (Bionic Beaver)"), but there should be no issues using other Linux operating systems. The server uses a secure PHP/MySql Nginx server, [Let’s Encrypt](https://letsencrypt.org/ "Let’s Encrypt") for free SSL encryption, and free IoT connectivity via the [iotJumpWay](https://www.iotJumpWay.tech "iotJumpWay").
 
 [![GeniSys AI Server](Media/Images/GeniSysHome.jpg)](https://github.com/GeniSysAI/Server)
@@ -19,28 +17,23 @@ Although the completed GeniSys Server will be accessible via the outside world, 
 [![GeniSys AI Server](Media/Images/GeniSysDashboard.jpg)](https://github.com/GeniSysAI/Server)
 
 # What Will We Do?
-
 This tutorial will help you setup the server required for your GeniSys network, and also takes you through setting up iotJumpWay devices and applications. In detail this guide will cover the following:
 
 - Installation: Ubuntu 18.04, Nginx, Let's Encrypt, PHP, MySql, phpMyAdmin, UFW, iotJumpWay
 - Setup: Nginx, PHP, MySql, phpMyAdmin, IPTables, iotJumpWay, Domain name & DNS configuration, router port forwarding, UFW security, Device Proxies
 
 # Installation & Setup
-
 The following guides will give you the basics of setting up a GeniSys Server. 
 
 # Install Ubuntu 18.04
-
 For this project, the operating system of choice is  [Ubuntu 18.04.1 LTS (Bionic Beaver)](http://releases.ubuntu.com/18.04/ "Ubuntu 18.04.1 LTS (Bionic Beaver)"). To get your operating system installed you can follow the [Create a bootable USB stick on Ubuntu](https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-ubuntu#0 "Create a bootable USB stick on Ubuntu") tutorial.
 
 # Setup Domain Name
-
 Now is as good a time as any to sort out and configure a domain name. You need to have your domain already hosted on a hosting account, from there edit the DNS zone by adding an A record to your public IP, for this you need a static IP or IP software that will update the IP in the DNZ Zone each time it changes.
 
 Once you have done this your domain name or subdomain will be pointing towards your public IP, if port 80 and 443 are not currently listening for traffic then visiting your domain name will result in a timeout for now.
 
 # Install Nginx
-
 Now it is time to install Nginx, follow the commands below to install the required software.
 
 ```
@@ -68,11 +61,9 @@ cat /var/log/nginx/error.log
 ```
 
 # Setup Port Forwarding
-
 Now you have your domain pointing to your public IP, it is time to add a port forward, traffic to your network will be coming from port 80 (insecure) and secure. Although Nginx will bounce the insecure traffic to port 443, we still need to add a port forward for port 80 as well as 443. How you will do this will vary, but you need to find the area of your router that allows you to add port forwards, and then add one port forward for incoming insecure traffic to port 80 of the server, and one for port 443. This will open the HTTP ports on your router and forward the traffic to the same ports on your server. In the case someone tries to access using insecure protocol (http - port 80) they will be automatically be sent to the secure port of the server (https - 443)
 
 # Install Let's Encrypt
-
 Security is everything, and it is even better when security is free ;) To encrypt our network we are going to use SSL provided by [Let’s Encrypt](https://letsencrypt.org/ "Let’s Encrypt"). Follow the commands below to set up Let’s Encrypt.
 
 ```
@@ -85,7 +76,6 @@ Security is everything, and it is even better when security is free ;) To encryp
 If you have followed above correctly you should now be able to access your website, but only using the secure protocol, 443, ie: https. If you visit your site you should now see the default Nginx page.
 
 # UFW Firewall
-
 Now you will set up your firewall:
 
 ```
@@ -108,7 +98,6 @@ Finally start and check the status
 ```
 
 # Install MySql
-
 Now it is time to install MySql on your server. Follow the commands below and complete any required steps for the installation to accomplish this.
 
 ```
@@ -141,7 +130,6 @@ Finally, create the required database:
 ```
 
 # Install PHP
-
 Now you will install PHP on your server. Follow the commands below and complete any required steps for the installation to accomplish this. You may need to swap 7.2 in the second command depending on what version of php-fpm is installed.
 
 ```
@@ -192,7 +180,6 @@ If you now visit the info page your website ie: https://www.YourDomain.com/info 
 ![GeniSys AI Server PHP config](Media/Images/PHP.jpg)
 
 # Install phpMyAdmin
-
 Now you should install phpMyAdmin and upload the default MySql table configuration.
  
 ```
@@ -207,13 +194,11 @@ Press tab -> enter -> yes -> password, then create a link to phpMyAdmin, if you 
 Now you should be able to visit phpMyAdmin by accessing the relevant directory on your website. 
 
 # Import MySql Databases
-
 First you can download the [basic database structure](https://github.com/GeniSysAI/Server/blob/requirements/database.sql "basic database structure") required for the GeniSys server, this structure will change frequently along with the rest of the project so you should keep an eye out for important changes. 
 
 Once you are logged in to phpMyAdmin, visit the import tab and import the sql file you just download and import it into the database you created earlier in the tutorial. 
 
 # Install iotJumpWay
-
 Now you need to install the iotJumpWay and setup some appications and devices. The following part of the tutorial will guide you through this. 
 
 - [Find out about the iotJumpWay](https://www.iotjumpway.tech/how-it-works "Find out about the iotJumpWay") 
@@ -235,19 +220,28 @@ To install the iotJumpWay MQTT software issue the following command on your serv
 ```
 
 # Install Repository Code
-
 Now you can add the repository code to your server, to do this follow the guide:
 
 - Clone the repo to the desktop of your server, or your preferred location on your server. The repository files have the same paths they would have on your server. 
 - [/etc/nginx/sites-available/default](https://github.com/GeniSysAI/Server/blob/master/etc/nginx/sites-available/default  "/etc/nginx/sites-available/default") is an example of how your server NGINX configuration should look, located on your server in the same location as in the repo.
-- You can copy the entire contents of the [Server/0.0.1/var/www](https://github.com/GeniSysAI/Server/tree/0.0.1/var/www  "Server/0.0.1/var/www") directory to the /var/www directory on your server.
+- You can copy the entire contents of the [Server/Media/Images/var/www](https://github.com/GeniSysAI/Server/tree/Media/Images/var/www  "Server/Media/Images/var/www") directory to the /var/www directory on your server.
+
+# Extensions
+The GeniSys Server is only the hub of the GeniSys network. Through the UI you can manage various aspects of your AI network including the local NLU Engine and TASS system, as well as other AI / IoT smart home devices. 
+
+## Local NLU Engine
+After following the [GeniSys NLU Engine](https://github.com/GeniSysAI/NLU "GeniSys NLU Engine") tutorial you will be able to manage,sss train and infer using the UI. 
+
+## Local TASS Engine
+After following the [GeniSys TASS Engine](https://github.com/GeniSysAI/Vision "GeniSys TASS Engine") tutorial you will be able to manage, train and infer using the UI.
+
+## Future Extensions
+Further extensions are planned / under development including a management system for the IDC Classifier ([Breast Cancer AI](https://www.facebook.com/BreastCancerAI "Breast Cancer AI")) & the AML Classifier ([Peter Moss Acute Myeloid Leukemia Research Project](https://www.facebook.com/AMLResearchProject/ "Peter Moss Acute Myeloid Leukemia Research Project")).
 
 # Update Configuration
-
 Now it is time to update our server configuration. Open the [/var/www/classes/startup/confs.json](https://github.com/GeniSysAI/Server/blob/var/www/classes/startup/confs.json  "/var/www/classes/startup/confs.json") file on your server and add your database credentials, your iotJumpWay application credentials, iotJumpWay location ID and Application MQTT credentials. You will use your iotJumpWay application credentials to authenticate yourself onto the UI.  
 
 # Voice Recognition
-
 It is now possible to interact with GeniSys using your voice. This feature is powered by an open source project [annyang](https://github.com/TalAter/annyang "annyang") which is basically a wrapper for the voice recognition feature of the web speech API, according to  [caniuse](https://caniuse.com/#feat=speech-synthesis "caniuse") support seems to be finally much wider including: Edge, Firefox, Chrome, Safari, ios Safari, Chrome for Android and Samsung Internet, but I have not tested anything other than Chrome. In Chrome for Android an alert noise is made every time the voice recognition restarts, this is unavoidable and there has been a long time developer request for Google to remove this feature but Google are adimant that it will remain. 
 
 If you have updated your server code and booted up the server you should get asked for permissions to use the microphone, once you accept you will be able to speak to your NLU providing the NLU is online.
